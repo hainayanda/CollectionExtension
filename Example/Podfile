@@ -1,0 +1,14 @@
+use_frameworks!
+
+platform :ios, '13.0'
+
+target 'CollectionExtension_Example' do
+  pod 'CollectionExtension', :path => '../'
+
+  target 'CollectionExtension_Tests' do
+    inherit! :search_paths
+
+    pod 'Quick', '~> 7.0.0'
+    pod 'Nimble', '~> 12.0.0'
+  end
+end
