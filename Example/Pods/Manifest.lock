@@ -1,12 +1,12 @@
 PODS:
   - CollectionExtension (0.1.0)
-  - Nimble (10.0.0)
-  - Quick (2.2.1)
+  - Nimble (12.0.1)
+  - Quick (7.0.2)
 
 DEPENDENCIES:
   - CollectionExtension (from `../`)
-  - Nimble (~> 10.0.0)
-  - Quick (~> 2.2.0)
+  - Nimble (~> 12.0.0)
+  - Quick (~> 7.0.0)
 
 SPEC REPOS:
   trunk:
@@ -18,10 +18,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CollectionExtension: b83d07963ab50ffea9140598745ab34ae28ccdad
-  Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
-  Quick: f5754d69b7013f5864c29aab9ae6f0c79c5bc200
+  CollectionExtension: 9cba487dd03c97b0c8b0ecb78ba87deb7d9a3d76
+  Nimble: b279b3ca9e094508778aab5c76417be158d3ad04
+  Quick: efab97aca76d60be86c15daa533b2cdfbe1a74d3
 
-PODFILE CHECKSUM: 5312c14821433b21cff19fad9949766b15c411a4
+PODFILE CHECKSUM: 95a6fa2fbd734e1960e1e2133cdf40d8ceb2c9e2
 
 COCOAPODS: 1.12.1
