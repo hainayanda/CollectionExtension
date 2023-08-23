@@ -9,13 +9,6 @@ import Foundation
 
 extension Array {
     
-    @inlinable public subscript(safe index: Int) -> Element? {
-        guard index >= 0, index < count else {
-            return nil
-        }
-        return self[index]
-    }
-    
     @inlinable public mutating func appendIfDistinct(_ element: Element, where consideredSame: (Element, Element) throws -> Bool) rethrows {
         guard !(try self.contains(where: { try consideredSame(element, $0) })) else {
             return
@@ -39,7 +32,7 @@ extension Array {
     }
     
     @inlinable public mutating func appendAllDistinct<S: Sequence, H: Hashable>(in sequence: S, _ projection: (Element) throws -> H) rethrows where S.Element == Element {
-        let toAppend = try sequence.substract(by: sequence, using: projection)
+        let toAppend = try sequence.substract(by: self, using: projection)
         append(contentsOf: toAppend)
     }
     
@@ -117,7 +110,7 @@ extension Array where Element: AnyObject {
         appendIfDistinct(element, where: ===)
     }
     
-    @inlinable public mutating func appendAllDistinctInstance<S: Sequence>(in sequence: S) where S.Element == Element {
+    @inlinable public mutating func appendAllDistinctInstances<S: Sequence>(in sequence: S) where S.Element == Element {
         appendAllDistinct(in: sequence) { ObjectIdentifier($0) }
     }
     
@@ -125,7 +118,7 @@ extension Array where Element: AnyObject {
         insertIfDistinct(element, at: index) { ObjectIdentifier($0) }
     }
     
-    @inlinable public mutating func insertAllDistinctInstance<S: Sequence>(in sequence: S, at index: Int) where S.Element == Element {
+    @inlinable public mutating func insertAllDistinctInstances<S: Sequence>(in sequence: S, at index: Int) where S.Element == Element {
         insertAllDistinct(in: sequence, at: index) { ObjectIdentifier($0) }
     }
 }

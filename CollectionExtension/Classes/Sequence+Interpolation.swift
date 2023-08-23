@@ -11,10 +11,10 @@ extension Sequence {
     @inlinable public func interpolate(forEach iteration: Int, element insertingElement: Element) -> [Element] {
         var result: [Element] = []
         for (index, element) in self.enumerated() {
-            result.append(element)
-            if index % iteration == 0 {
+            if index > 0, index % iteration == 0 {
                 result.append(insertingElement)
             }
+            result.append(element)
         }
         return result
     }
@@ -22,10 +22,10 @@ extension Sequence {
     @inlinable public func interpolate<S: Sequence>(forEach iteration: Int, elements insertingElements: S) -> [Element] where S.Element == Element {
         var result: [Element] = []
         for (index, element) in self.enumerated() {
-            result.append(element)
-            if index % iteration == 0 {
+            if index > 0, index % iteration == 0 {
                 result.append(contentsOf: insertingElements)
             }
+            result.append(element)
         }
         return result
     }

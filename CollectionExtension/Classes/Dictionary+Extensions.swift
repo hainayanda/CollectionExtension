@@ -10,7 +10,7 @@ import Foundation
 extension Dictionary {
     
     /// Map Dictionary keys to another keys
-    /// Key generated must be unique, otherwise it will replace the duplicated value with the last one mapped
+    /// Key generated must be unique, otherwise it will throw CollectionExtensionError.duplicatedKey
     /// - Complexity: O(*n*), where *n* is the length of this dictionary.
     /// - Parameter mapper: Closure that map the old keys to the new one
     /// - Returns: New dictionary with new set of keys
@@ -27,9 +27,18 @@ extension Dictionary {
         return result
     }
     
+    @inlinable public func overwriteMapKeys<K: Hashable>(_ transform: (Key) throws -> K) rethrows -> [K: Value] {
+        var result: [K: Value] = [:]
+        for (key, value) in self {
+            let newKey = try transform(key)
+            result[newKey] = value
+        }
+        return result
+    }
+    
     /// Map Dictionary keys to another keys
     /// If new key is nil, it will then ignore it and proceed with next key
-    /// Key generated must be unique, otherwise it will replace the duplicated value with the last one mapped
+    /// Key generated must be unique, otherwise it will throw CollectionExtensionError.duplicatedKey
     /// - Complexity: O(*n*), where *n* is the length of this dictionary
     /// - Parameter mapper: Closure that map the old keys to the new one
     /// - Returns: New dictionary with new set of keys
@@ -46,13 +55,22 @@ extension Dictionary {
         return result
     }
     
+    @inlinable public func overwriteCompactMapKeys<K: Hashable>(_ transform: (Key) throws -> K?) rethrows -> [K: Value] {
+        var result: [K: Value] = [:]
+        for (key, value) in self {
+            guard let newKey = try transform(key) else { continue }
+            result[newKey] = value
+        }
+        return result
+    }
+    
     /// Map Dictionary keys to another keys and values to another values
-    /// Key generated must be unique, otherwise it will replace the duplicated value with the last one mapped
+    /// Key generated must be unique, otherwise it will throw CollectionExtensionError.duplicatedKey
     /// - Complexity: O(*n*), where *n* is the length of this dictionary
     /// - Parameter mapper: Closure that map the old keys and values to the new one
     /// - Returns: New dictionary with new set of keys and values
     /// - Throws: rethrows or CollectionExtensionError
-    @inlinable func mapKeyValues<K: Hashable, V>(_ transform: (Key, Value) throws -> (key: K, value: V)) throws -> [K: V] {
+    @inlinable public func mapKeyValues<K: Hashable, V>(_ transform: (Key, Value) throws -> (key: K, value: V)) throws -> [K: V] {
         var result: [K: V] = [:]
         for (key, value) in self {
             let pair = try transform(key, value)
@@ -64,20 +82,38 @@ extension Dictionary {
         return result
     }
     
+    @inlinable public func overwriteMapKeyValues<K: Hashable, V>(_ transform: (Key, Value) throws -> (key: K, value: V)) rethrows -> [K: V] {
+        var result: [K: V] = [:]
+        for (key, value) in self {
+            let pair = try transform(key, value)
+            result[pair.key] = pair.value
+        }
+        return result
+    }
+    
     /// Map Dictionary keys to another keys and values to another values
     /// If new key and value is nil, it will then ignore it and proceed with next key
-    /// Key generated must be unique, otherwise it will replace the duplicated value with the last one mapped
+    /// Key generated must be unique, otherwise it will throw CollectionExtensionError.duplicatedKey
     /// - Complexity: O(*n*), where *n* is the length of this dictionary
     /// - Parameter mapper: Closure that map the old keys and values to the new one
     /// - Returns: New dictionary with new set of keys and values
     /// - Throws: rethrows or CollectionExtensionError
-    @inlinable func compactMapKeyValues<K: Hashable, V>(_ transform: (Key, Value) throws -> (key: K, value: V)?) throws -> [K: V] {
+    @inlinable public func compactMapKeyValues<K: Hashable, V>(_ transform: (Key, Value) throws -> (key: K, value: V)?) throws -> [K: V] {
         var result: [K: V] = [:]
         for (key, value) in self {
             guard let pair = try transform(key, value) else { continue }
             guard !result.contains(key: pair.key) else {
                 throw CollectionExtensionError.duplicatedKey
             }
+            result[pair.key] = pair.value
+        }
+        return result
+    }
+    
+    @inlinable public func overwriteCompactMapKeyValues<K: Hashable, V>(_ transform: (Key, Value) throws -> (key: K, value: V)?) rethrows -> [K: V] {
+        var result: [K: V] = [:]
+        for (key, value) in self {
+            guard let pair = try transform(key, value) else { continue }
             result[pair.key] = pair.value
         }
         return result

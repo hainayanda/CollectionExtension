@@ -8,12 +8,19 @@
 import Foundation
 
 extension Array {
-    
+    /// Create new array added with given element at the end of the array
+    /// - Complexity: O(1)
+    /// - Parameter element: Element added
+    /// - Returns: New array with added element
     @inlinable public func added(with element: Element) -> [Element] {
         mutatingNewArray { $0.append(element) }
     }
     
-    @inlinable func added<S: Sequence>(withContentsOf sequence: S) -> [Element] where S.Element == Element {
+    /// Create new array added with given contents of the sequence at the end of the array
+    /// - Complexity: O(*m*) on average, where *m* is the length of sequence
+    /// - Parameter sequence: Sequence of the elements
+    /// - Returns: New array with added sequence
+    @inlinable public func added<S: Sequence>(withContentsOf sequence: S) -> [Element] where S.Element == Element {
         mutatingNewArray { $0.append(contentsOf: sequence) }
     }
     
@@ -41,10 +48,22 @@ extension Array {
         mutatingNewArray { $0.appendAllDistinct(in: sequence, using: propertyKeyPath) }
     }
     
+    /// Create new array added with given elements at the given index
+    /// - Complexity: O(*n*), where *n* is the length of arrays
+    /// - Parameters:
+    ///   - index: Index of the new element
+    ///   - element: Element added
+    /// - Returns: New array with added element
     @inlinable public func inserted(with element: Element, at index: Int) -> [Element] {
         mutatingNewArray { $0.insert(element, at: index) }
     }
     
+    /// Create new array added with given contents of the collection at the given index
+    /// - Complexity: O(*n* + *m*), where *n* is the length of arrays and *m* is length of collection
+    /// - Parameters:
+    ///   - index: Index of the new element
+    ///   - collection: Collection of the elements
+    /// - Returns: New array with added collection
     @inlinable public func inserted<C: Collection>(withContentsOf collection: C, at index: Int) -> [Element] where C.Element == Element {
         mutatingNewArray { $0.insert(contentsOf: collection, at: index) }
     }
@@ -73,19 +92,27 @@ extension Array {
         mutatingNewArray { $0.insertAllDistinct(in: sequence, at: index, using: propertyKeyPath) }
     }
     
-    @inlinable func removed(at index: Index) -> [Element] {
+    /// Create new array with removed element at given index
+    /// - Complexity: O(*n*) where *n* is the length of arrays
+    /// - Parameter index: Index to remove
+    /// - Returns: New array with removed element
+    @inlinable public func removed(at index: Index) -> [Element] {
         mutatingNewArray { $0.remove(at: index) }
     }
     
-    @inlinable func removedAll(where found: (Element) -> Bool) -> [Element] {
+    /// Create new array with removed element when element found
+    /// - Complexity: O(*n*) where *n* is the length of arrays
+    /// - Parameter found: Closure to check element needs to be removed
+    /// - Returns: New array with removed element
+    @inlinable public func removedAll(where found: (Element) -> Bool) -> [Element] {
         mutatingNewArray { $0.removeAll(where: found) }
     }
     
-    @inlinable func removedLast(_ k: Int = 1) -> [Element] {
+    @inlinable public func removedLast(_ k: Int = 1) -> [Element] {
         mutatingNewArray { $0.removeLast(k) }
     }
     
-    @inlinable func removedFirst(_ k: Int = 1) -> [Element] {
+    @inlinable public func removedFirst(_ k: Int = 1) -> [Element] {
         mutatingNewArray { $0.removeFirst(k) }
     }
     
@@ -133,30 +160,42 @@ extension Array where Element: Equatable {
         insertedAllDistinct(in: sequence, at: index, where: ==)
     }
     
-    @inlinable func removedAll(_ element: Element) -> [Element] {
+    @inlinable public func removedAll(_ element: Element) -> [Element] {
         removedAll { $0 == element }
+    }
+    
+    @inlinable public func removedAll<S: Sequence>(in sequence: S) -> [Element] where S.Element == Element {
+        removedAll { sequence.contains($0) }
     }
 }
 
 extension Array where Element: AnyObject {
     
     @inlinable public func addedIfDistinctInstance(with element: Element) -> [Element] {
-        addedIfDistinct(with: element) { ObjectIdentifier($0) }
+        mutatingNewArray { $0.appendIfDistinctInstance(element) }
     }
     
     @inlinable public func addedAllDistinctInstances<S: Sequence>(in sequence: S) -> [Element] where S.Element == Element {
-        addedAllDistinct(in: sequence) { ObjectIdentifier($0) }
+        mutatingNewArray { $0.appendAllDistinctInstances(in: sequence) }
     }
     
     @inlinable public func insertedIfDistinctInstance(with element: Element, at index: Int) -> [Element] {
-        insertedIfDistinct(with: element, at: index) { ObjectIdentifier($0) }
+        mutatingNewArray { $0.insertIfDistinctInstance(element, at: index) }
     }
     
     @inlinable public func insertedAllDistinctInstances<S: Sequence>(in sequence: S, at index: Int) -> [Element] where S.Element == Element {
-        insertedAllDistinct(in: sequence, at: index) { ObjectIdentifier($0) }
+        mutatingNewArray { $0.insertAllDistinctInstances(in: sequence, at: index) }
     }
     
-    @inlinable func removedAllInstances(_ element: Element) -> [Element] {
-        removedAll { $0 === element }
+    @inlinable public func removedAllInstances(_ element: Element) -> [Element] {
+        mutatingNewArray { $0.removeAll { $0 === element } }
+    }
+    
+    @inlinable public func removedAllInstances<S: Sequence>(in sequence: S) -> [Element] where S.Element == Element {
+        mutatingNewArray {
+            $0.removeAll { element in
+                sequence.contains { $0 === element }
+            }
+        }
     }
 }

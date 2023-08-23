@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		18A4ECA10923DFBA4A82CAD6 /* Pods_CollectionExtension_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EF7FDDC0E829E54F1E55F8C /* Pods_CollectionExtension_Tests.framework */; };
+		3A49EEFA2A95AD3D00570560 /* SequenceInterpolationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49EEF92A95AD3D00570560 /* SequenceInterpolationSpec.swift */; };
+		3A49EEFC2A95B54900570560 /* SequenceIntersectionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49EEFB2A95B54900570560 /* SequenceIntersectionSpec.swift */; };
+		3A49EEFE2A95B56600570560 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49EEFD2A95B56600570560 /* Dummy.swift */; };
+		3ADB42922A95A2C000D1F001 /* CollectionExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB42912A95A2C000D1F001 /* CollectionExtensionSpec.swift */; };
+		3ADB42942A95A4EA00D1F001 /* ArrayExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB42932A95A4EA00D1F001 /* ArrayExtensionSpec.swift */; };
+		3ADB42962A95AB1B00D1F001 /* DictionaryExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB42952A95AB1B00D1F001 /* DictionaryExtensionsSpec.swift */; };
+		3ADB42982A95AC6F00D1F001 /* DoublyLinkedListSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB42972A95AC6F00D1F001 /* DoublyLinkedListSpec.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		DB0B7B990EF3DB5713B26E64 /* Pods_CollectionExtension_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C397CAAD738C59EAB21704 /* Pods_CollectionExtension_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +36,13 @@
 /* Begin PBXFileReference section */
 		0EF7FDDC0E829E54F1E55F8C /* Pods_CollectionExtension_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectionExtension_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27C397CAAD738C59EAB21704 /* Pods_CollectionExtension_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectionExtension_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A49EEF92A95AD3D00570560 /* SequenceInterpolationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceInterpolationSpec.swift; sourceTree = "<group>"; };
+		3A49EEFB2A95B54900570560 /* SequenceIntersectionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceIntersectionSpec.swift; sourceTree = "<group>"; };
+		3A49EEFD2A95B56600570560 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		3ADB42912A95A2C000D1F001 /* CollectionExtensionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionSpec.swift; sourceTree = "<group>"; };
+		3ADB42932A95A4EA00D1F001 /* ArrayExtensionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionSpec.swift; sourceTree = "<group>"; };
+		3ADB42952A95AB1B00D1F001 /* DictionaryExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtensionsSpec.swift; sourceTree = "<group>"; };
+		3ADB42972A95AC6F00D1F001 /* DoublyLinkedListSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedListSpec.swift; sourceTree = "<group>"; };
 		3ED074A11E2207C9EC8CB435 /* Pods-CollectionExtension_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionExtension_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CollectionExtension_Tests/Pods-CollectionExtension_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CollectionExtension_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionExtension_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,7 +53,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* CollectionExtension_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectionExtension_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		79632345E33AB9BE664C8874 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		8FEDD4071A49D90396BF110D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		AFD28B43018DDB4AC0E9BCBE /* CollectionExtension.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CollectionExtension.podspec; path = ../CollectionExtension.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -126,7 +138,13 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				3ADB42932A95A4EA00D1F001 /* ArrayExtensionSpec.swift */,
+				3ADB42912A95A2C000D1F001 /* CollectionExtensionSpec.swift */,
+				3ADB42952A95AB1B00D1F001 /* DictionaryExtensionsSpec.swift */,
+				3ADB42972A95AC6F00D1F001 /* DoublyLinkedListSpec.swift */,
+				3A49EEFD2A95B56600570560 /* Dummy.swift */,
+				3A49EEF92A95AD3D00570560 /* SequenceInterpolationSpec.swift */,
+				3A49EEFB2A95B54900570560 /* SequenceIntersectionSpec.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -186,6 +204,7 @@
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "CollectionExtension_Tests" */;
 			buildPhases = (
 				B9240224AC1C5579928D21D9 /* [CP] Check Pods Manifest.lock */,
+				3ADB42902A959F4A00D1F001 /* Swiftlint */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -263,6 +282,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3ADB42902A959F4A00D1F001 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --config ../.swiftlint.yml\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		9016CFAED65B32F63B7B8203 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -361,7 +398,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				3A49EEFC2A95B54900570560 /* SequenceIntersectionSpec.swift in Sources */,
+				3A49EEFE2A95B56600570560 /* Dummy.swift in Sources */,
+				3ADB42942A95A4EA00D1F001 /* ArrayExtensionSpec.swift in Sources */,
+				3A49EEFA2A95AD3D00570560 /* SequenceInterpolationSpec.swift in Sources */,
+				3ADB42922A95A2C000D1F001 /* CollectionExtensionSpec.swift in Sources */,
+				3ADB42982A95AC6F00D1F001 /* DoublyLinkedListSpec.swift in Sources */,
+				3ADB42962A95AB1B00D1F001 /* DictionaryExtensionsSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
