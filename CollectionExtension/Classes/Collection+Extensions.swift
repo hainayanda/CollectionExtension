@@ -156,6 +156,33 @@ extension Collection {
         }
         return lastModus.element
     }
+    
+    /// Return the element that appears most often in this array
+    /// - Complexity: O(*n*)  on average, where *n* is the size of the sequence
+    /// - Parameter projection: Closure that accept an element and return hashable projection of it
+    /// - Returns: Element that appears most often in this array
+    @inlinable public func modus<H: Hashable>(using projection: (Element) -> H) -> Element? {
+        var counted: [H: Int] = [:]
+        let lastModus: (element: Element?, count: Int) = (nil, 0)
+        return reduce(lastModus) { lastModus, element in
+            let identifier = projection(element)
+            let currentCount = (counted[identifier] ?? 0) + 1
+            counted[identifier] = currentCount
+            return lastModus.count < currentCount ? (element, currentCount): lastModus
+        }.element
+    }
+    
+    @inlinable public func modus<P: Hashable>(by propertyKeypath: KeyPath<Element, P>) -> Element? {
+        modus { $0[keyPath: propertyKeypath] }
+    }
+}
+
+extension Sequence where Self: Collection, Element: Hashable {
+    /// Return the element that appears most often in this array
+    /// - Complexity: O(*n*)  on average, where *n* is the size of the sequence
+    @inlinable public var modus: Element? {
+        modus { $0 }
+    }
 }
 
 extension Collection where Element: Equatable {
@@ -170,14 +197,7 @@ extension Collection where Element: AnyObject {
     /// Return the object that appears most often in this array
     /// - Complexity: O(*n*)  on average, where *n* is the size of the sequence
     @inlinable public var modusInstances: Element? {
-        var counted: [ObjectIdentifier: Int] = [:]
-        let lastModus: (element: Element?, count: Int) = (nil, 0)
-        return reduce(lastModus) { lastModus, element in
-            let identifier = ObjectIdentifier(element)
-            let currentCount = (counted[identifier] ?? 0) + 1
-            counted[identifier] = currentCount
-            return lastModus.count < currentCount ? (element, currentCount): lastModus
-        }.element
+        modus { ObjectIdentifier($0) }
     }
 }
 
