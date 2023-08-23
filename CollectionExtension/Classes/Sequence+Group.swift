@@ -24,7 +24,7 @@ extension Sequence {
         group { $0[keyPath: propertyKeypath] }
     }
     
-    @inlinable public func transformToDictionary<K: Hashable>(_ transform: (Int, Element) throws -> K) throws -> [K: Element] {
+    @inlinable public func transformToDictionary<K: Hashable>(keyed transform: (Int, Element) throws -> K) throws -> [K: Element] {
         var result: [K: Element] = [:]
         for (index, element) in self.enumerated() {
             let key = try transform(index, element)
@@ -36,7 +36,7 @@ extension Sequence {
         return result
     }
     
-    @inlinable public func transformToDictionary<K: Hashable>(by propertyKeypath: KeyPath<Element, K>) throws -> [K: Element] {
+    @inlinable public func transformToDictionary<K: Hashable>(keyedBy propertyKeypath: KeyPath<Element, K>) throws -> [K: Element] {
         try transformToDictionary { _, element in
             element[keyPath: propertyKeypath]
         }
