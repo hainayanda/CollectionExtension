@@ -8,11 +8,16 @@
 
 import Foundation
 
-class DummyObject {
+class DummyObject: Equatable {
+    
     let uuid: UUID
     
     init(uuid: UUID =  UUID()) {
         self.uuid = uuid
+    }
+    
+    static func == (lhs: DummyObject, rhs: DummyObject) -> Bool {
+        lhs === rhs
     }
 }
 
