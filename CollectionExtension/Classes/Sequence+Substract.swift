@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: Sequence
+
 extension Sequence {
     @inlinable public func substract<S: Sequence, H: Hashable>(by otherSequence: S, using projection: (Element) throws -> H) rethrows -> [Element] where S.Element == Element {
         let substraction: Set<H> = try Set(otherSequence.map(projection))
@@ -38,6 +40,44 @@ extension Sequence where Element: Equatable {
 
 extension Sequence where Element: AnyObject {
     @inlinable public func substractInstances<S: Sequence>(by otherSequence: S) -> [Element] where S.Element == Element {
+        substract(by: otherSequence, using: { ObjectIdentifier($0) })
+    }
+}
+
+// MARK: LazySequence
+
+extension LazySequenceProtocol {
+    
+    @inlinable public func substract<S: Sequence, H: Hashable>(by otherSequence: S, using projection: @escaping (Element) -> H) -> LazyFilterSequence<Elements> where S.Element == Element {
+        lazy var substraction: Set<H> = Set(otherSequence.map(projection))
+        return filter { !substraction.contains(projection($0)) }
+    }
+    
+    @inlinable public func substract<S: Sequence>(by otherSequence: S, where consideredSame: @escaping (Element, Element) -> Bool) -> LazyFilterSequence<Elements> where S.Element == Element {
+        return filter { element in
+            !otherSequence.contains(where: { consideredSame(element, $0) })
+        }
+    }
+    
+    @inlinable public func substract<S: Sequence, H: Hashable>(by otherSequence: S, by propertyKeyPath: KeyPath<Element, H>) -> LazyFilterSequence<Elements> where S.Element == Element {
+        substract(by: otherSequence, using: { $0[keyPath: propertyKeyPath] })
+    }
+}
+
+extension LazySequence where Element: Hashable {
+    @inlinable public func substract<S: Sequence>(by otherSequence: S) -> LazyFilterSequence<Elements> where S.Element == Element {
+        substract(by: otherSequence, using: { $0 })
+    }
+}
+
+extension LazySequenceProtocol where Element: Equatable {
+    @inlinable public func substract<S: Sequence>(by otherSequence: S) -> LazyFilterSequence<Elements> where S.Element == Element {
+        substract(by: otherSequence, where: ==)
+    }
+}
+
+extension LazySequenceProtocol where Element: AnyObject {
+    @inlinable public func substractInstances<S: Sequence>(by otherSequence: S) -> LazyFilterSequence<Elements> where S.Element == Element {
         substract(by: otherSequence, using: { ObjectIdentifier($0) })
     }
 }

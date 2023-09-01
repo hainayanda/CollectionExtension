@@ -70,9 +70,23 @@ extension Array {
     @inlinable public mutating func insertAllDistinct<S: Sequence, H: Hashable>(in sequence: S, at index: Int, using propertyKeyPath: KeyPath<Element, H>) where S.Element == Element {
         insertAllDistinct(in: sequence, at: index) { $0[keyPath: propertyKeyPath] }
     }
+    
+    @inlinable public mutating func removeAll<E: Equatable>(_ element: Element, using projection: (Element) -> E) {
+        let toRemove = projection(element)
+        removeAll { projection($0) == toRemove }
+    }
+    
+    @inlinable public mutating func removeAll<S: Sequence, H: Hashable>(in sequence: S, _ projection: (Element) -> H) where S.Element == Element{
+        let toRemove = Set(sequence.map(projection))
+        removeAll { toRemove.contains(projection($0)) }
+    }
 }
 
 extension Array where Element: Hashable {
+    
+    @inlinable public mutating func appendIfDistinct(_ element: Element) {
+        appendIfDistinct(element) { $0 }
+    }
     
     @inlinable public mutating func appendAllDistinct<S: Sequence>(in sequence: S) where S.Element == Element {
         appendAllDistinct(in: sequence) { $0 }

@@ -163,10 +163,6 @@ extension Array where Element: Equatable {
     @inlinable public func removedAll(_ element: Element) -> [Element] {
         removedAll { $0 == element }
     }
-    
-    @inlinable public func removedAll<S: Sequence>(in sequence: S) -> [Element] where S.Element == Element {
-        removedAll { sequence.contains($0) }
-    }
 }
 
 extension Array where Element: AnyObject {
@@ -189,13 +185,5 @@ extension Array where Element: AnyObject {
     
     @inlinable public func removedAllInstances(_ element: Element) -> [Element] {
         mutatingNewArray { $0.removeAll { $0 === element } }
-    }
-    
-    @inlinable public func removedAllInstances<S: Sequence>(in sequence: S) -> [Element] where S.Element == Element {
-        mutatingNewArray {
-            $0.removeAll { element in
-                sequence.contains { $0 === element }
-            }
-        }
     }
 }
