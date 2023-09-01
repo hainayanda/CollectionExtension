@@ -15,6 +15,20 @@ class CollectionExtensionSpec: QuickSpec {
     
     // swiftlint:disable function_body_length
     override class func spec() {
+        context("common") {
+            it("it should get element when index is in bounds") {
+                expect([1, 2, 3][safe: 1]).to(equal(2))
+            }
+            it("it should get nil when index is out  of bounds") {
+                expect([1, 2, 3][safe: 3]).to(beNil())
+            }
+            it("it should return true if its not empty") {
+                expect([1, 2, 3].isNotEmpty).to(beTrue())
+            }
+            it("it should return false if its empty") {
+                expect([Int]().isNotEmpty).to(beFalse())
+            }
+        }
         context("int") {
             let arrayEven: [Int] = [5, 4, 3, 1, 6, 5, 2, 1]
             let arrayOdd: [Int] = [5, 4, 3, 1, 5, 2, 1]
@@ -77,16 +91,62 @@ class CollectionExtensionSpec: QuickSpec {
             expect([1, 2, 2, 3, 3, 3, 4, 5, 5].modus(where: ==)).to(equal(3))
         }
         it("should get modus of objects") {
-            let obj1 = NSObject()
-            let obj2 = NSObject()
-            let obj3 = NSObject()
-            let obj4 = NSObject()
-            let obj5 = NSObject()
+            let obj1 = DummyObject()
+            let obj2 = DummyObject()
+            let obj3 = DummyObject()
+            let obj4 = DummyObject()
+            let obj5 = DummyObject()
             expect([obj1, obj2, obj2, obj3, obj3, obj3, obj4, obj5, obj5].modusInstances).to(equal(obj3))
+        }
+        it("should get modus using keypath") {
+            let obj1 = DummyObject()
+            let obj2 = DummyObject()
+            let obj3 = DummyObject()
+            let obj4 = DummyObject()
+            let obj5 = DummyObject()
+            expect([obj1, obj2, obj2, obj3, obj3, obj3, obj4, obj5, obj5].modus(by: \.uuid)).to(equal(obj3))
+        }
+        it("should get modus for equatable") {
+            let obj1 = DummyEquatable()
+            let obj2 = DummyEquatable()
+            let obj3 = DummyEquatable()
+            let obj4 = DummyEquatable()
+            let obj5 = DummyEquatable()
+            expect([obj1, obj2, obj2, obj3, obj3, obj3, obj4, obj5, obj5].modus).to(equal(obj3))
         }
         it("should group by frequency") {
             expect([1, 2, 2, 3, 3, 3, 4, 5, 5].groupedByFrequency())
                 .to(equal([1: 1, 2: 2, 3: 3, 4: 1, 5: 2]))
+        }
+        it("should group by frequency using comparator") {
+            expect([1, 2, 2, 3, 3, 3, 4, 5, 5].groupedByFrequency(where: ==))
+                .to(equal([.init(1, count: 1), .init(2, count: 2), .init(3, count: 3), .init(4, count: 1), .init(5, count: 2)]))
+        }
+        it("should group by frequency using projection") {
+            expect([1, 2, 2, 3, 3, 3, 4, 5, 5].groupedByFrequency(using: { $0 }))
+                .to(equal([.init(1, count: 1), .init(2, count: 2), .init(3, count: 3), .init(4, count: 1), .init(5, count: 2)]))
+        }
+        it("should get modus of objects") {
+            let obj1 = DummyObject()
+            let obj2 = DummyObject()
+            let obj3 = DummyObject()
+            let obj4 = DummyObject()
+            let obj5 = DummyObject()
+            let array = [obj1, obj2, obj2, obj3, obj3, obj3, obj4, obj5, obj5]
+            expect(array.groupedInstancesByFrequency())
+                .to(equal([.init(obj1, count: 1), .init(obj2, count: 2), .init(obj3, count: 3), .init(obj4, count: 1), .init(obj5, count: 2)]))
+            expect(array.instanceCount(obj3)).to(equal(3))
+        }
+        it("should get modus of objects") {
+            let obj1 = DummyEquatable()
+            let obj2 = DummyEquatable()
+            let obj3 = DummyEquatable()
+            let obj4 = DummyEquatable()
+            let obj5 = DummyEquatable()
+            let array = [obj1, obj2, obj2, obj3, obj3, obj3, obj4, obj5, obj5]
+            expect(array.groupedByFrequency())
+                .to(equal([.init(obj1, count: 1), .init(obj2, count: 2), .init(obj3, count: 3), .init(obj4, count: 1), .init(obj5, count: 2)]))
+            expect(array.elementCount(obj3)).to(equal(3))
         }
     }
     // swiftlint:enable function_body_length

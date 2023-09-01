@@ -12,7 +12,7 @@ extension Sequence {
         var filtered: Set<H> = .init()
         return try filter { element in
             let hashable = try projection(element)
-            guard filtered.contains(hashable) else {
+            guard !filtered.contains(hashable) else {
                 return false
             }
             filtered.insert(hashable)

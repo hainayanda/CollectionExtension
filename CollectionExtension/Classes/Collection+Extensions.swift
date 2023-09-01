@@ -19,14 +19,6 @@ extension Collection {
     @inlinable public var isNotEmpty: Bool {
         !isEmpty
     }
-    
-    @inlinable public func mutatingReduce<Result>(_ initialResult: Result, _ reducer: (inout Result, Element) throws -> Void) rethrows -> Result {
-        try reduce(initialResult) { partialResult, element in
-            var nextResult = partialResult
-            try reducer(&nextResult, element)
-            return nextResult
-        }
-    }
 }
 
 // MARK: Median
@@ -177,14 +169,6 @@ extension Collection {
     }
 }
 
-extension Sequence where Self: Collection, Element: Hashable {
-    /// Return the element that appears most often in this array
-    /// - Complexity: O(*n*)  on average, where *n* is the size of the sequence
-    @inlinable public var modus: Element? {
-        modus { $0 }
-    }
-}
-
 extension Collection where Element: Equatable {
     /// Return the element that appears most often in this array
     /// - Complexity: O(*n*^2)  at worst and O(*n*+1) at best, on average it should be O((*n*^2)/2), where *n* is the size of the sequence
@@ -201,21 +185,34 @@ extension Collection where Element: AnyObject {
     }
 }
 
+public struct ElementCountPair<Element> {
+    public let element: Element
+    public let count: Int
+    
+    public init(_ element: Element, count: Int) {
+        self.element = element
+        self.count = count
+    }
+}
+
+extension ElementCountPair: Equatable where Element: Equatable { }
+extension ElementCountPair: Hashable where Element: Hashable { }
+
 extension Collection {
     
-    @inlinable public func groupedByFrequency(where consideredSame: (Element, Element) -> Bool) -> [(element: Element, count: Int)] {
+    @inlinable public func groupedByFrequency(where consideredSame: (Element, Element) -> Bool) -> [ElementCountPair<Element>] {
         distinct(where: consideredSame)
             .map { element in
                 let count = elementCount { consideredSame($0, element) }
-                return (element, count)
+                return ElementCountPair(element, count: count)
             }
     }
     
-    @inlinable public func groupedByFrequency<H: Hashable>(using projection: (Element) throws -> H) rethrows -> [(element: Element, count: Int)] {
+    @inlinable public func groupedByFrequency<H: Hashable>(using projection: (Element) throws -> H) rethrows -> [ElementCountPair<Element>] {
         let grouped = try map(projection).groupedByFrequency()
         return try distinct(using: projection)
             .map { element in
-                return try (element, grouped[projection(element)] ?? 0)
+                return try ElementCountPair(element, count: grouped[projection(element)] ?? 0)
             }
     }
     
@@ -227,7 +224,7 @@ extension Collection {
 }
 
 extension Collection where Element: Equatable {
-    @inlinable public func groupedByFrequency() -> [(element: Element, count: Int)] {
+    @inlinable public func groupedByFrequency() -> [ElementCountPair<Element>] {
         groupedByFrequency(where: ==)
     }
     
@@ -237,7 +234,7 @@ extension Collection where Element: Equatable {
 }
 
 extension Collection where Element: AnyObject {
-    @inlinable public func groupedInstancesByFrequency() -> [(element: Element, count: Int)] {
+    @inlinable public func groupedInstancesByFrequency() -> [ElementCountPair<Element>] {
         groupedByFrequency { ObjectIdentifier($0) }
     }
     
@@ -252,7 +249,7 @@ extension Collection where Element: Hashable {
     /// - Complexity: O(*n*), where *n* is the size of the sequence
     /// - Returns: Dictionary of Element and Int
     @inlinable public func groupedByFrequency() -> [Element: Int] {
-        mutatingReduce([:]) { partialResult, element in
+        reduce(into: [:]) { partialResult, element in
             partialResult[element] = (partialResult[element] ?? 0) + 1
         }
     }
