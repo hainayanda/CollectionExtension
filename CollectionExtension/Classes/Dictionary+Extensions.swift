@@ -130,14 +130,14 @@ extension Dictionary {
 
 extension Dictionary where Value: Equatable {
     
-    @inlinable public func containsValue(_ value: Value) -> Bool {
-        values.contains(where: { $0 == value })
+    @inlinable public func contains(value: Value) -> Bool {
+        containsValue { $0 == value }
     }
 }
 
 extension Dictionary where Value: AnyObject {
     
     @inlinable public func containsInstanceValue(_ value: Value) -> Bool {
-        values.contains(where: { $0 === value })
+        containsValue { $0 === value }
     }
 }
