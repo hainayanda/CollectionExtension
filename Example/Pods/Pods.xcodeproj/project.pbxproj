@@ -57,6 +57,7 @@
 		3A3885672A9519D400B06638 /* Median.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3885662A9519D400B06638 /* Median.swift */; };
 		3A8C79DB2AA199E900A20E9A /* LazyConcatenateSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8C79DA2AA199E900A20E9A /* LazyConcatenateSequence.swift */; };
 		3A8C79DD2AA1A57F00A20E9A /* Sequence+TypeErase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8C79DC2AA1A57F00A20E9A /* Sequence+TypeErase.swift */; };
+		3AF3A3B92AA202F500184F59 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3A3B82AA202F500184F59 /* Sequence+Extensions.swift */; };
 		3D91096FC812D66378F048B84449CEF6 /* QCKConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB414D92B54F3A1FB88F31DCBFE6E7D /* QCKConfiguration.swift */; };
 		45D83BC18E4E0C0511EE045DF6049602 /* Polling+AsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EE00BA39621A90549849C5BDDC7BA2 /* Polling+AsyncAwait.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		47AF00D4980301CB0282899CF1528076 /* Quick.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFD7194EBF59DAF3033EF9D2DEE568A /* Quick.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -242,6 +243,7 @@
 		3A3885662A9519D400B06638 /* Median.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Median.swift; sourceTree = "<group>"; };
 		3A8C79DA2AA199E900A20E9A /* LazyConcatenateSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyConcatenateSequence.swift; sourceTree = "<group>"; };
 		3A8C79DC2AA1A57F00A20E9A /* Sequence+TypeErase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+TypeErase.swift"; sourceTree = "<group>"; };
+		3AF3A3B82AA202F500184F59 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		3B2737FDBAAA3FA3F349C0D203E3C438 /* SuiteHooks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SuiteHooks.swift; path = Sources/Quick/Hooks/SuiteHooks.swift; sourceTree = "<group>"; };
 		3B98D891C2632E4F35695D6ADD8C2D26 /* Quick-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Quick-dummy.m"; sourceTree = "<group>"; };
 		3D90E12DB48E8D37CE93FE0BD5F1E560 /* CwlCatchException.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CwlCatchException.m; path = Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 				3A3885662A9519D400B06638 /* Median.swift */,
 				3A38854C2A94D87A00B06638 /* Sequence+Distinction.swift */,
 				3A3885562A94E66F00B06638 /* Sequence+Drop.swift */,
+				3AF3A3B82AA202F500184F59 /* Sequence+Extensions.swift */,
 				3A38855E2A94F12200B06638 /* Sequence+Group.swift */,
 				3A3885582A94EA7A00B06638 /* Sequence+Interpolation.swift */,
 				3A3885522A94E4A800B06638 /* Sequence+Intersection.swift */,
@@ -1080,6 +1083,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF3A3B92AA202F500184F59 /* Sequence+Extensions.swift in Sources */,
 				3A3885572A94E66F00B06638 /* Sequence+Drop.swift in Sources */,
 				3A3885512A94DC2F00B06638 /* Sequence+Substract.swift in Sources */,
 				3A3885532A94E4A800B06638 /* Sequence+Intersection.swift in Sources */,

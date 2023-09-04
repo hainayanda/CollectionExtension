@@ -16,6 +16,7 @@
 		3ADB42942A95A4EA00D1F001 /* ArrayExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB42932A95A4EA00D1F001 /* ArrayExtensionSpec.swift */; };
 		3ADB42962A95AB1B00D1F001 /* DictionaryExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB42952A95AB1B00D1F001 /* DictionaryExtensionsSpec.swift */; };
 		3ADB42982A95AC6F00D1F001 /* DoublyLinkedListSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB42972A95AC6F00D1F001 /* DoublyLinkedListSpec.swift */; };
+		3AF3A3BB2AA2033200184F59 /* LazyContantenateSequenceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3A3BA2AA2033200184F59 /* LazyContantenateSequenceSpec.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		3ADB42932A95A4EA00D1F001 /* ArrayExtensionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionSpec.swift; sourceTree = "<group>"; };
 		3ADB42952A95AB1B00D1F001 /* DictionaryExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtensionsSpec.swift; sourceTree = "<group>"; };
 		3ADB42972A95AC6F00D1F001 /* DoublyLinkedListSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedListSpec.swift; sourceTree = "<group>"; };
+		3AF3A3BA2AA2033200184F59 /* LazyContantenateSequenceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyContantenateSequenceSpec.swift; sourceTree = "<group>"; };
 		3ED074A11E2207C9EC8CB435 /* Pods-CollectionExtension_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionExtension_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CollectionExtension_Tests/Pods-CollectionExtension_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CollectionExtension_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionExtension_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				3A49EEF92A95AD3D00570560 /* SequenceInterpolationSpec.swift */,
 				3A49EEFB2A95B54900570560 /* SequenceIntersectionSpec.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
+				3AF3A3BA2AA2033200184F59 /* LazyContantenateSequenceSpec.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				3A8C79DF2AA1E9BD00A20E9A /* ArrayFunctionalExtensionsSpec.swift in Sources */,
 				3A49EEFA2A95AD3D00570560 /* SequenceInterpolationSpec.swift in Sources */,
 				3ADB42922A95A2C000D1F001 /* CollectionExtensionSpec.swift in Sources */,
+				3AF3A3BB2AA2033200184F59 /* LazyContantenateSequenceSpec.swift in Sources */,
 				3ADB42982A95AC6F00D1F001 /* DoublyLinkedListSpec.swift in Sources */,
 				3ADB42962A95AB1B00D1F001 /* DictionaryExtensionsSpec.swift in Sources */,
 			);

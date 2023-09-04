@@ -137,7 +137,7 @@ extension Dictionary where Value: Equatable {
 
 extension Dictionary where Value: AnyObject {
     
-    @inlinable public func containsInstanceValue(_ value: Value) -> Bool {
-        containsValue { $0 === value }
+    @inlinable public func contains(instance: Value) -> Bool {
+        containsValue { $0 === instance }
     }
 }

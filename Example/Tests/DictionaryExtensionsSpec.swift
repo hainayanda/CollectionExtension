@@ -82,6 +82,16 @@ class DictionaryExtensionsSpec: QuickSpec {
         it("should return false if not contains value") {
             expect(dictionary.contains(value: "six")).to(beFalse())
         }
+        it("should return true if contains value") {
+            let valueToSearch = DummyObject()
+            let instancesDictionary = [1: DummyObject(), 2: valueToSearch, 3: DummyObject(), 4: DummyObject(), 5: DummyObject()]
+            expect(instancesDictionary.contains(instance: valueToSearch)).to(beTrue())
+        }
+        it("should return false if not contains value") {
+            let valueToSearch = DummyObject()
+            let instancesDictionary = [1: DummyObject(), 2: DummyObject(), 3: DummyObject(), 4: DummyObject(), 5: DummyObject()]
+            expect(instancesDictionary.contains(instance: valueToSearch)).to(beFalse())
+        }
     }
     // swiftlint:enable function_body_length
 }
