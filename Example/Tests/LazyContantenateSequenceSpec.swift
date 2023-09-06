@@ -15,7 +15,7 @@ class LazyContantenateSequenceSpec: QuickSpec {
     override class func spec() {
         it("should concantenate sequence") {
             let sequence1 = [1, 2, 3].lazy
-            let sequence2 = [4, 5, 6].lazy
+            let sequence2 = DoublyLinkedList([4, 5, 6]).lazy
             expect(sequence1.concantenate(with: sequence2).toArray()).to(equal([1, 2, 3, 4, 5, 6]))
         }
         it("should concantenate sequences") {

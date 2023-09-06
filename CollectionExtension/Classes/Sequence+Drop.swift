@@ -66,7 +66,7 @@ extension LazySequenceProtocol {
         return filter { element in
             if found { return false }
             found = elementFound(element)
-            return !found
+            return true
         }
     }
 }
