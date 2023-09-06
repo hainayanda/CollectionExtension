@@ -17,6 +17,8 @@
 		3A4D15DD2AA8ADC700361F82 /* SequenceSubstractSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D15DC2AA8ADC700361F82 /* SequenceSubstractSpec.swift */; };
 		3A4D15DF2AA8AF0900361F82 /* SequenceSymetricDifferenceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D15DE2AA8AF0900361F82 /* SequenceSymetricDifferenceSpec.swift */; };
 		3A4D15E12AA8B06F00361F82 /* SequenceTypeEraseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D15E02AA8B06F00361F82 /* SequenceTypeEraseSpec.swift */; };
+		3A4D15E52AA8D78100361F82 /* SequenceAsyncAwaitSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D15E42AA8D78100361F82 /* SequenceAsyncAwaitSpec.swift */; };
+		3A4D15E72AA8DCEF00361F82 /* SequenceFutureSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D15E62AA8DCEF00361F82 /* SequenceFutureSpec.swift */; };
 		3A8C79DF2AA1E9BD00A20E9A /* ArrayFunctionalExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8C79DE2AA1E9BD00A20E9A /* ArrayFunctionalExtensionsSpec.swift */; };
 		3ADB42922A95A2C000D1F001 /* CollectionExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB42912A95A2C000D1F001 /* CollectionExtensionSpec.swift */; };
 		3ADB42942A95A4EA00D1F001 /* ArrayExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB42932A95A4EA00D1F001 /* ArrayExtensionSpec.swift */; };
@@ -53,6 +55,8 @@
 		3A4D15DC2AA8ADC700361F82 /* SequenceSubstractSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceSubstractSpec.swift; sourceTree = "<group>"; };
 		3A4D15DE2AA8AF0900361F82 /* SequenceSymetricDifferenceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceSymetricDifferenceSpec.swift; sourceTree = "<group>"; };
 		3A4D15E02AA8B06F00361F82 /* SequenceTypeEraseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceTypeEraseSpec.swift; sourceTree = "<group>"; };
+		3A4D15E42AA8D78100361F82 /* SequenceAsyncAwaitSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceAsyncAwaitSpec.swift; sourceTree = "<group>"; };
+		3A4D15E62AA8DCEF00361F82 /* SequenceFutureSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceFutureSpec.swift; sourceTree = "<group>"; };
 		3A8C79DE2AA1E9BD00A20E9A /* ArrayFunctionalExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayFunctionalExtensionsSpec.swift; sourceTree = "<group>"; };
 		3ADB42912A95A2C000D1F001 /* CollectionExtensionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionSpec.swift; sourceTree = "<group>"; };
 		3ADB42932A95A4EA00D1F001 /* ArrayExtensionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionSpec.swift; sourceTree = "<group>"; };
@@ -161,15 +165,17 @@
 				3ADB42972A95AC6F00D1F001 /* DoublyLinkedListSpec.swift */,
 				3A49EEFD2A95B56600570560 /* Dummy.swift */,
 				3AF3A3BA2AA2033200184F59 /* LazyContantenateSequenceSpec.swift */,
+				3A4D15E42AA8D78100361F82 /* SequenceAsyncAwaitSpec.swift */,
 				3A4D15D62AA8A09500361F82 /* SequenceDistinctSpec.swift */,
 				3A4D15D82AA8A5F000361F82 /* SequenceDropSpec.swift */,
+				3A4D15E62AA8DCEF00361F82 /* SequenceFutureSpec.swift */,
 				3A4D15DA2AA8A8EF00361F82 /* SequenceGroupSpec.swift */,
 				3A49EEF92A95AD3D00570560 /* SequenceInterpolationSpec.swift */,
 				3A49EEFB2A95B54900570560 /* SequenceIntersectionSpec.swift */,
-				607FACE91AFB9204008FA782 /* Supporting Files */,
 				3A4D15DC2AA8ADC700361F82 /* SequenceSubstractSpec.swift */,
 				3A4D15DE2AA8AF0900361F82 /* SequenceSymetricDifferenceSpec.swift */,
 				3A4D15E02AA8B06F00361F82 /* SequenceTypeEraseSpec.swift */,
+				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -423,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4D15E52AA8D78100361F82 /* SequenceAsyncAwaitSpec.swift in Sources */,
 				3A49EEFC2A95B54900570560 /* SequenceIntersectionSpec.swift in Sources */,
 				3A49EEFE2A95B56600570560 /* Dummy.swift in Sources */,
 				3ADB42942A95A4EA00D1F001 /* ArrayExtensionSpec.swift in Sources */,
@@ -431,6 +438,7 @@
 				3A8C79DF2AA1E9BD00A20E9A /* ArrayFunctionalExtensionsSpec.swift in Sources */,
 				3A4D15D92AA8A5F000361F82 /* SequenceDropSpec.swift in Sources */,
 				3A49EEFA2A95AD3D00570560 /* SequenceInterpolationSpec.swift in Sources */,
+				3A4D15E72AA8DCEF00361F82 /* SequenceFutureSpec.swift in Sources */,
 				3ADB42922A95A2C000D1F001 /* CollectionExtensionSpec.swift in Sources */,
 				3AF3A3BB2AA2033200184F59 /* LazyContantenateSequenceSpec.swift in Sources */,
 				3A4D15DF2AA8AF0900361F82 /* SequenceSymetricDifferenceSpec.swift in Sources */,

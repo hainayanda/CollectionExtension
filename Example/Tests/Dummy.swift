@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum TestError: Error {
+    case expectedError
+    case unexpectedError
+}
+
 class DummyObject: Equatable {
     
     let uuid: UUID
