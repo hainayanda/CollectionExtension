@@ -10,10 +10,21 @@ import Foundation
 extension Array {
     
     @inlinable public subscript(safe index: Int) -> Element? {
-        guard index >= 0 && index < count else {
-            return nil
+        get {
+            guard index >= 0 && index < count else {
+                return nil
+            }
+            return self[index]
+        } set {
+            guard index >= 0 && index < count else {
+                return
+            }
+            guard let newValue else {
+                remove(at: index)
+                return
+            }
+            self[index] = newValue
         }
-        return self[index]
     }
     
     /// Adds a new element at the end of the array if the element is not present in the array

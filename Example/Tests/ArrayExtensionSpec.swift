@@ -30,7 +30,27 @@ class ArrayExtensionsSpec: QuickSpec {
             it("it should get element when index is in bounds") {
                 expect([1, 2, 3][safe: 1]).to(equal(2))
             }
-            it("it should get nil when index is out  of bounds") {
+            it("it should replace element when index is in bounds") {
+                var array = [1, 2, 3]
+                array[safe: 1] = 4
+                expect(array).to(equal([1, 4, 3]))
+            }
+            it("it should remove element when index is in bounds") {
+                var array = [1, 2, 3]
+                array[safe: 1] = nil
+                expect(array).to(equal([1, 3]))
+            }
+            it("it should not replace element when index is out of bounds") {
+                var array = [1, 2, 3]
+                array[safe: 3] = 4
+                expect(array).to(equal([1, 2, 3]))
+            }
+            it("it should not replace element when index is out of bounds") {
+                var array = [1, 2, 3]
+                array[safe: 3] = nil
+                expect(array).to(equal([1, 2, 3]))
+            }
+            it("it should get nil when index is out of bounds") {
                 expect([1, 2, 3][safe: 3]).to(beNil())
             }
             it("it should return true if its not empty") {
