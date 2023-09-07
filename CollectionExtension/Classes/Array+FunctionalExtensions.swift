@@ -161,7 +161,7 @@ extension Array where Element: Equatable {
     }
     
     @inlinable public func removedAll(_ element: Element) -> [Element] {
-        removedAll { $0 == element }
+        mutatingNewArray { $0.removeAll(element) }
     }
 }
 
@@ -184,6 +184,6 @@ extension Array where Element: AnyObject {
     }
     
     @inlinable public func removedAllInstances(_ element: Element) -> [Element] {
-        mutatingNewArray { $0.removeAll { $0 === element } }
+        mutatingNewArray { $0.removeAllInstances(element) }
     }
 }

@@ -24,6 +24,8 @@ class ArrayExtensionsSpec: QuickSpec {
         let dummyObj2 = DummyObject()
         let dummyObj3 = DummyObject()
         let dummyObj4 = DummyObject()
+        let dummyObj5 = DummyObject()
+        let dummyObj6 = DummyObject()
         
         describe("append if distinct") {
             context("one element") {
@@ -200,6 +202,18 @@ class ArrayExtensionsSpec: QuickSpec {
                     array.insertAllDistinct(in: [2, 3, 4], at: 2, using: \.description)
                     expect(array).to(equal([1, 2, 3, 4]))
                 }
+            }
+        }
+        describe("removeAll") {
+            it("should remove all element") {
+                var array = [1, 6, 6, 2, 3, 6, 4, 5, 6]
+                array.removeAll(6)
+                expect(array).to(equal([1, 2, 3, 4, 5]))
+            }
+            it("should remove all instance") {
+                var array = [dummyObj1, dummyObj6, dummyObj6, dummyObj2, dummyObj3, dummyObj6, dummyObj4, dummyObj5, dummyObj6]
+                array.removeAllInstances(dummyObj6)
+                expect(array).to(equal([dummyObj1, dummyObj2, dummyObj3, dummyObj4, dummyObj5]))
             }
         }
     }
