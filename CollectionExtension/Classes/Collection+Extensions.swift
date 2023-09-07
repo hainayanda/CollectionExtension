@@ -16,6 +16,7 @@ extension Collection {
         return self[index]
     }
     
+    /// True if the collection is not empty
     @inlinable public var isNotEmpty: Bool {
         !isEmpty
     }
@@ -50,6 +51,7 @@ extension Collection where Element: Comparable {
 // MARK: Sum
 
 extension Collection where Element: AdditiveArithmetic {
+    
     /// Sum all the elements in this array
     /// - Complexity: O(*n*)  on average, where *n* is the size of the sequence
     @inlinable public var sum: Element {
@@ -62,6 +64,7 @@ extension Collection where Element: AdditiveArithmetic {
 // MARK: Average
 
 extension Collection where Element: FloatingPoint {
+    
     /// Calculate average value of the array elements
     /// - Complexity: O(*n*)  on average, where *n* is the size of the sequence
     @inlinable public var average: Element {
@@ -75,6 +78,7 @@ extension Collection where Element: FloatingPoint {
 }
 
 extension Collection where Element: BinaryInteger {
+    
     /// Calculate average value of the array elements
     /// - Complexity: O(*n*)  on average, where *n* is the size of the sequence
     @inlinable public var average: Element {
@@ -117,6 +121,7 @@ extension Collection where Element: Comparable {
 // MARK: Modus
 
 extension Collection where Element: Hashable {
+    
     /// Return the element that appears most often in this array
     /// - Complexity: O(*n*)  on average, where *n* is the size of the sequence
     @inlinable public var modus: Element? {
@@ -131,8 +136,9 @@ extension Collection where Element: Hashable {
 }
 
 extension Collection {
+    
     /// Return the element that appears most often in this array
-    /// - Complexity: O(*n*^2)  at worst and O(*n*+1) at best, on average it should be O((*n*^2)/2), where *n* is the size of the sequence
+    /// - Complexity: O(*n*^2)  at worst and O(*n*) at best, on average it should be O((*n*^2)/2), where *n* is the size of the sequence
     /// - Parameter consideredSame: Closure used to compare the elements
     /// - Returns: Element that appears most often in this array
     @inlinable public func modus(where consideredSame: (Element, Element) -> Bool) -> Element? {
@@ -164,6 +170,9 @@ extension Collection {
         }.element
     }
     
+    /// Return the element that appears most often in this array
+    /// - Parameter propertyKeypath: Key path to the element property that conform Hashable that will be used as comparison
+    /// - Returns: Element that appears most often in this array
     @inlinable public func modus<P: Hashable>(by propertyKeypath: KeyPath<Element, P>) -> Element? {
         modus { $0[keyPath: propertyKeypath] }
     }
@@ -200,6 +209,9 @@ extension ElementCountPair: Hashable where Element: Hashable { }
 
 extension Collection {
     
+    /// Return array of ElementCountPair with element and its count in the collection
+    /// - Parameter consideredSame: Closure that accept two element and return boolean that determined that the element is considered same or not
+    /// - Returns: Array of ElementCountPair
     @inlinable public func groupedByFrequency(where consideredSame: (Element, Element) -> Bool) -> [ElementCountPair<Element>] {
         distinct(where: consideredSame)
             .map { element in
@@ -208,6 +220,9 @@ extension Collection {
             }
     }
     
+    /// Return array of ElementCountPair with element and its count in the collection
+    /// - Parameter projection: Closure that accept one element and convert it to a value that conform equatable that will be used as comparison
+    /// - Returns: Array of ElementCountPair
     @inlinable public func groupedByFrequency<H: Hashable>(using projection: (Element) throws -> H) rethrows -> [ElementCountPair<Element>] {
         let grouped = try map(projection).groupedByFrequency()
         return try distinct(using: projection)
@@ -216,6 +231,9 @@ extension Collection {
             }
     }
     
+    /// Return element count in the collection
+    /// - Parameter matched: Closure that accept an element and return boolean indicated that the element matched or not
+    /// - Returns: Count of the element found in the collection
     @inlinable public func elementCount(where matched: (Element) -> Bool) -> Int {
         reduce(0) { partialResult, element in
             return matched(element) ? partialResult + 1: partialResult
@@ -224,20 +242,32 @@ extension Collection {
 }
 
 extension Collection where Element: Equatable {
+    
+    /// Return array of ElementCountPair with element and its count in the collection
+    /// - Returns: Array of ElementCountPair
     @inlinable public func groupedByFrequency() -> [ElementCountPair<Element>] {
         groupedByFrequency(where: ==)
     }
     
+    /// Return element count in the collection
+    /// - Parameter element: element to be count
+    /// - Returns: Count of the element found in the collection
     @inlinable public func elementCount(_ element: Element) -> Int {
         elementCount { $0 == element }
     }
 }
 
 extension Collection where Element: AnyObject {
+    
+    /// Return array of ElementCountPair with element and its count in the collection
+    /// - Returns: Array of ElementCountPair
     @inlinable public func groupedInstancesByFrequency() -> [ElementCountPair<Element>] {
         groupedByFrequency { ObjectIdentifier($0) }
     }
     
+    /// Return instance count in the collection
+    /// - Parameter element: instance to be count
+    /// - Returns: Count of the instance found in the collection
     @inlinable public func instanceCount(_ element: Element) -> Int {
         elementCount { $0 === element }
     }

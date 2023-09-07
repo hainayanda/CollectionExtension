@@ -16,11 +16,12 @@ class CollectionExtensionSpec: QuickSpec {
     // swiftlint:disable function_body_length
     override class func spec() {
         context("common") {
+            let sequence = DoublyLinkedList([1, 2, 3])
             it("it should get element when index is in bounds") {
-                expect([1, 2, 3][safe: 1]).to(equal(2))
+                expect(sequence[safe: 1]).to(equal(2))
             }
             it("it should get nil when index is out  of bounds") {
-                expect([1, 2, 3][safe: 3]).to(beNil())
+                expect(sequence[safe: 3]).to(beNil())
             }
             it("it should return true if its not empty") {
                 expect([1, 2, 3].isNotEmpty).to(beTrue())

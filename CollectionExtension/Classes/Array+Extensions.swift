@@ -9,6 +9,13 @@ import Foundation
 
 extension Array {
     
+    @inlinable public subscript(safe index: Int) -> Element? {
+        guard index >= 0 && index < count else {
+            return nil
+        }
+        return self[index]
+    }
+    
     /// Adds a new element at the end of the array if the element is not present in the array
     /// - Parameters:
     ///   - element: The element to append to the array.

@@ -26,7 +26,20 @@ class ArrayExtensionsSpec: QuickSpec {
         let dummyObj4 = DummyObject()
         let dummyObj5 = DummyObject()
         let dummyObj6 = DummyObject()
-        
+        context("common") {
+            it("it should get element when index is in bounds") {
+                expect([1, 2, 3][safe: 1]).to(equal(2))
+            }
+            it("it should get nil when index is out  of bounds") {
+                expect([1, 2, 3][safe: 3]).to(beNil())
+            }
+            it("it should return true if its not empty") {
+                expect([1, 2, 3].isNotEmpty).to(beTrue())
+            }
+            it("it should return false if its empty") {
+                expect([Int]().isNotEmpty).to(beFalse())
+            }
+        }
         describe("append if distinct") {
             context("one element") {
                 it("should append if distinct for hashable") {
