@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: LazyConcatenateSequence
 
+/// Concantenated sequences into one lazy sequence
 public struct LazyConcatenateSequence<Element>: LazySequenceProtocol {
     
     public typealias Iterator = LazyConcatenateIterator<Element>
@@ -66,10 +67,16 @@ public struct LazyConcatenateIterator<Element>: IteratorProtocol {
 
 extension LazySequenceProtocol {
     
+    /// Concantenate this lazy sequence with other sequence with same type of element
+    /// - Parameter sequence: Sequence to be concantenated
+    /// - Returns: LazyConcatenateSequence of the same element
     public func concantenate<S: Sequence>(with sequence: S) -> LazyConcatenateSequence<Element> where S.Element == Element {
         LazyConcatenateSequence(self, sequence)
     }
     
+    /// Concantenate this lazy sequence with other sequences with same type of this sequence
+    /// - Parameter sequences: Sequences to be concantenated
+    /// - Returns: LazyConcatenateSequence of the same element
     public func concantenate(with sequences: Self...) -> LazyConcatenateSequence<Element> {
         LazyConcatenateSequence(
             sequences: sequences.inserted(with: self, at: .zero)
