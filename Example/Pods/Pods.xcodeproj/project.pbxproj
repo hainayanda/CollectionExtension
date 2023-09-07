@@ -47,7 +47,6 @@
 		3A3885532A94E4A800B06638 /* Sequence+Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3885522A94E4A800B06638 /* Sequence+Intersection.swift */; };
 		3A3885552A94E54300B06638 /* Sequence+SymetricDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3885542A94E54300B06638 /* Sequence+SymetricDifference.swift */; };
 		3A3885572A94E66F00B06638 /* Sequence+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3885562A94E66F00B06638 /* Sequence+Drop.swift */; };
-		3A3885592A94EA7A00B06638 /* Sequence+Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3885582A94EA7A00B06638 /* Sequence+Interpolation.swift */; };
 		3A38855B2A94EBC000B06638 /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38855A2A94EBC000B06638 /* DoublyLinkedList.swift */; };
 		3A38855D2A94EED600B06638 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38855C2A94EED600B06638 /* Dictionary+Extensions.swift */; };
 		3A38855F2A94F12200B06638 /* Sequence+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38855E2A94F12200B06638 /* Sequence+Group.swift */; };
@@ -234,7 +233,6 @@
 		3A3885522A94E4A800B06638 /* Sequence+Intersection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Intersection.swift"; sourceTree = "<group>"; };
 		3A3885542A94E54300B06638 /* Sequence+SymetricDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+SymetricDifference.swift"; sourceTree = "<group>"; };
 		3A3885562A94E66F00B06638 /* Sequence+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Drop.swift"; sourceTree = "<group>"; };
-		3A3885582A94EA7A00B06638 /* Sequence+Interpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Interpolation.swift"; sourceTree = "<group>"; };
 		3A38855A2A94EBC000B06638 /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
 		3A38855C2A94EED600B06638 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		3A38855E2A94F12200B06638 /* Sequence+Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Group.swift"; sourceTree = "<group>"; };
@@ -475,7 +473,6 @@
 				3A3885562A94E66F00B06638 /* Sequence+Drop.swift */,
 				3AF3A3B82AA202F500184F59 /* Sequence+Extensions.swift */,
 				3A38855E2A94F12200B06638 /* Sequence+Group.swift */,
-				3A3885582A94EA7A00B06638 /* Sequence+Interpolation.swift */,
 				3A3885522A94E4A800B06638 /* Sequence+Intersection.swift */,
 				3A3885502A94DC2F00B06638 /* Sequence+Substract.swift */,
 				3A3885542A94E54300B06638 /* Sequence+SymetricDifference.swift */,
@@ -1091,7 +1088,6 @@
 				3A3885512A94DC2F00B06638 /* Sequence+Substract.swift in Sources */,
 				3A3885532A94E4A800B06638 /* Sequence+Intersection.swift in Sources */,
 				3A3885632A94FC9500B06638 /* Array+FunctionalExtensions.swift in Sources */,
-				3A3885592A94EA7A00B06638 /* Sequence+Interpolation.swift in Sources */,
 				3A38855F2A94F12200B06638 /* Sequence+Group.swift in Sources */,
 				1C57551FA94E102BA54D9FF096C5B578 /* CollectionExtension-dummy.m in Sources */,
 				3A3885552A94E54300B06638 /* Sequence+SymetricDifference.swift in Sources */,

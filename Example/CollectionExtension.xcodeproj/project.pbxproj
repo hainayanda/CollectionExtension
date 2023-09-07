@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		18A4ECA10923DFBA4A82CAD6 /* Pods_CollectionExtension_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EF7FDDC0E829E54F1E55F8C /* Pods_CollectionExtension_Tests.framework */; };
-		3A49EEFA2A95AD3D00570560 /* SequenceInterpolationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49EEF92A95AD3D00570560 /* SequenceInterpolationSpec.swift */; };
 		3A49EEFC2A95B54900570560 /* SequenceIntersectionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49EEFB2A95B54900570560 /* SequenceIntersectionSpec.swift */; };
 		3A49EEFE2A95B56600570560 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49EEFD2A95B56600570560 /* Dummy.swift */; };
 		3A4D15D72AA8A09500361F82 /* SequenceDistinctSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D15D62AA8A09500361F82 /* SequenceDistinctSpec.swift */; };
@@ -46,7 +45,6 @@
 /* Begin PBXFileReference section */
 		0EF7FDDC0E829E54F1E55F8C /* Pods_CollectionExtension_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectionExtension_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27C397CAAD738C59EAB21704 /* Pods_CollectionExtension_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectionExtension_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A49EEF92A95AD3D00570560 /* SequenceInterpolationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceInterpolationSpec.swift; sourceTree = "<group>"; };
 		3A49EEFB2A95B54900570560 /* SequenceIntersectionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceIntersectionSpec.swift; sourceTree = "<group>"; };
 		3A49EEFD2A95B56600570560 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		3A4D15D62AA8A09500361F82 /* SequenceDistinctSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceDistinctSpec.swift; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 				3A4D15D82AA8A5F000361F82 /* SequenceDropSpec.swift */,
 				3A4D15E62AA8DCEF00361F82 /* SequenceFutureSpec.swift */,
 				3A4D15DA2AA8A8EF00361F82 /* SequenceGroupSpec.swift */,
-				3A49EEF92A95AD3D00570560 /* SequenceInterpolationSpec.swift */,
 				3A49EEFB2A95B54900570560 /* SequenceIntersectionSpec.swift */,
 				3A4D15DC2AA8ADC700361F82 /* SequenceSubstractSpec.swift */,
 				3A4D15DE2AA8AF0900361F82 /* SequenceSymetricDifferenceSpec.swift */,
@@ -437,7 +434,6 @@
 				3A4D15DB2AA8A8EF00361F82 /* SequenceGroupSpec.swift in Sources */,
 				3A8C79DF2AA1E9BD00A20E9A /* ArrayFunctionalExtensionsSpec.swift in Sources */,
 				3A4D15D92AA8A5F000361F82 /* SequenceDropSpec.swift in Sources */,
-				3A49EEFA2A95AD3D00570560 /* SequenceInterpolationSpec.swift in Sources */,
 				3A4D15E72AA8DCEF00361F82 /* SequenceFutureSpec.swift in Sources */,
 				3ADB42922A95A2C000D1F001 /* CollectionExtensionSpec.swift in Sources */,
 				3AF3A3BB2AA2033200184F59 /* LazyContantenateSequenceSpec.swift in Sources */,
