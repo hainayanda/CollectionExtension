@@ -25,15 +25,15 @@ class SequenceGroupSpec: QuickSpec {
             expect(grouped).to(equal(expected))
         }
         it("should transform to dictionary") {
-            let dictionary = try [1, 2, 3].transformToDictionary { index, _ in
+            let dictionary = try [1, 2, 3].enumerated().transformToDictionary { (index, _) in
                 return index
-            }
+            }.mapValues { $0.element }
             let expected = [0: 1, 1: 2, 2: 3]
             expect(dictionary).to(equal(expected))
         }
         it("should throw error") {
             expect {
-                try [1, 2, 2, 3].transformToDictionary { _, element in
+                try [1, 2, 2, 3].transformToDictionary { element in
                     return element
                 }
             }
