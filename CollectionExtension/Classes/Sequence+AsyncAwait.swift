@@ -12,6 +12,9 @@ import Combine
 
 extension Sequence {
     
+    /// Calls the given closure on each element in the sequence in the same order asynchronously and wait for all to finished
+    /// It will run the closure asynchronously and throwing error if one of the closure is failing.
+    /// - Parameter doTask: Asynchronous task to be run on each iteration
     public func asyncForEach(_ doTask: @escaping (Element) async throws -> Void) async rethrows {
         try await withThrowingTaskGroup(of: Void.self, returning: Void.self) { group in
             for element in self {
@@ -21,6 +24,8 @@ extension Sequence {
         }
     }
     
+    /// Calls the given closure on each element in the sequence in the same order asynchronously and wait for all to finished while ignoring the error throws
+    /// - Parameter doTask: Asynchronous task to be run on each iteration
     public func asyncForEachIgnoreError(_ doTask: @escaping (Element) async throws -> Void) async {
         await asyncForEach { element in
             try? await doTask(element)
@@ -30,9 +35,7 @@ extension Sequence {
     /// Returns an array containing the results of mapping the given async closure over the sequence's elements.
     /// It will run asynchronously and throwing error if one of the element is failing in the given async closure.
     /// It will still retain the original order of the element regardless of the order of mapping time completion
-    /// - Parameters:
-    ///   - timeout: timeout in second, by default 30 seconds
-    ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
+    /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///             and returns a transformed value of the same or of a different type asynchronously.
     /// - Returns: An array containing the transformed elements of this sequence
     public func asyncMap<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped) async rethrows -> [Mapped] {
@@ -57,9 +60,7 @@ extension Sequence {
     /// while ignoring `null` value.
     /// It will run asynchronously and throwing error if one of the element is failing in the given async closure.
     /// It will still retain the original order of the element regardless of the order of mapping time completion
-    /// - Parameters:
-    ///   - timeout: timeout in second, by default 30 seconds
-    ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
+    /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///             and returns an optional transformed value of the same or of a different type asynchronously.
     /// - Returns: An array containing the transformed elements of this sequence
     public func asyncCompactMap<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped?) async rethrows -> [Mapped] {
@@ -76,10 +77,20 @@ extension Sequence {
         }
     }
     
+    /// Returns an array containing the results of mapping the given async closure over the sequence's elements
+    /// while ignoring `null` value.
+    /// It will run asynchronously and ignore the error if one of the element is failing in the given async closure.
+    /// It will still retain the original order of the element regardless of the order of mapping time completion
+    /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
+    /// - Returns: An array containing the transformed elements of this sequence
     public func asyncCompactMapSkipError<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped?) async -> [Mapped] {
         await asyncCompactMap { try? await mapper($0) }
     }
     
+    /// Calls the given closure on each element in the sequence in the same order asynchronously and wait for all to finished
+    /// It will run the closure asynchronously and throwing error if one of the closure is failing.
+    /// - Parameter doTask: Asynchronous task to be run on each iteration
+    /// - Returns: A publisher that run after all the task is finished
     public func futureForEach(_ doTask: @escaping (Element) async throws -> Void) -> Future<Void, Error> {
         Future { promise in
             Task {
@@ -92,6 +103,9 @@ extension Sequence {
         }
     }
     
+    /// Calls the given closure on each element in the sequence in the same order asynchronously and wait for all to finished while ignoring the error throws
+    /// - Parameter doTask: Asynchronous task to be run on each iteration
+    /// - Returns: A publisher that run after all the task is finished
     public func futureForEachIgnoreError(_ doTask: @escaping (Element) async throws -> Void) -> Future<Void, Error> {
         Future { promise in
             Task {
@@ -100,7 +114,7 @@ extension Sequence {
         }
     }
     
-    /// Returns an array containing the results of mapping the given async closure over the sequence's elements.
+    /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements.
     /// It will run asynchronously and throwing error if one of the element is failing in the given async closure.
     /// It will still retain the original order of the element regardless of the order of mapping time completion
     /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
@@ -118,6 +132,11 @@ extension Sequence {
         }
     }
     
+    /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements.
+    /// It will run asynchronously and ignoring the error if one of the element is failing in the given async closure.
+    /// It will still retain the original order of the element regardless of the order of mapping time completion
+    /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
+    /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
     public func futureMapSkipError<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped) -> Future<[Mapped], Error> {
         Future { promise in
             Task {
@@ -126,7 +145,7 @@ extension Sequence {
         }
     }
     
-    /// Returns an array containing the results of mapping the given async closure over the sequence's elements
+    /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements
     /// while ignoring `null` value.
     /// It will run asynchronously and throwing error if one of the element is failing in the given async closure.
     /// It will still retain the original order of the element regardless of the order of mapping time completion
@@ -145,6 +164,12 @@ extension Sequence {
         }
     }
     
+    /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements
+    /// while ignoring `null` value.
+    /// It will run asynchronously and ignore the error if one of the element is failing in the given async closure.
+    /// It will still retain the original order of the element regardless of the order of mapping time completion
+    /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
+    /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
     public func futureCompactMapSkipError<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped?) -> Future<[Mapped], Error> {
         Future { promise in
             Task {
