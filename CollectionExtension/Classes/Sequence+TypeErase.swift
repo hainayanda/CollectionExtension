@@ -8,12 +8,16 @@
 import Foundation
 
 extension Sequence {
+    /// Wrap this sequence into type erased sequence
+    /// - Returns: AnySequence of element
     public func eraseToAnySequence() -> AnySequence<Element> {
         AnySequence(self)
     }
 }
 
 extension LazySequenceProtocol {
+    /// Wrap this sequence into type erased lazy sequence
+    /// - Returns: AnyLazySequence of element
     public func eraseToAnyLazySequence() -> AnyLazySequence<Element> {
         AnyLazySequence {
             var iterator = self.makeIterator()
