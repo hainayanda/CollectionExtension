@@ -16,6 +16,10 @@ extension Array {
             }
             return self[index]
         } set {
+            if index == count, let newValue {
+                append(newValue)
+                return
+            }
             guard index >= 0 && index < count else {
                 return
             }

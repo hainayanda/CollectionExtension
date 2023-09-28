@@ -40,10 +40,10 @@ class ArrayExtensionsSpec: QuickSpec {
                 array[safe: 1] = nil
                 expect(array).to(equal([1, 3]))
             }
-            it("it should not replace element when index is out of bounds") {
+            it("it should append element when index is same as count") {
                 var array = [1, 2, 3]
                 array[safe: 3] = 4
-                expect(array).to(equal([1, 2, 3]))
+                expect(array).to(equal([1, 2, 3, 4]))
             }
             it("it should not replace element when index is out of bounds") {
                 var array = [1, 2, 3]
