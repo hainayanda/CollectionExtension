@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CollectionExtension'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of CollectionExtension.'
+  s.version          = '1.0.0'
+  s.summary          = 'Collection of Array, Sequence, and any collection extensions'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+CollectionExtension is a collection of Array, Sequence, and any collection extensions
                        DESC
 
   s.homepage         = 'https://github.com/hainayanda/CollectionExtension'
