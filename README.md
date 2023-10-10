@@ -2,6 +2,14 @@
 
 **CollectionExtension** is a versatile collection of extensions and utilities for arrays, dictionaries, sequences, and various collection types in Swift. These extensions offer added functionality for performing various operations on collections.
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/64f3d05c9de64449b767a506097e52a2)](https://app.codacy.com/gh/hainayanda/CollectionExtension/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+![build](https://github.com/hainayanda/CollectionExtension/workflows/build/badge.svg)
+![test](https://github.com/hainayanda/CollectionExtension/workflows/test/badge.svg)
+[![SwiftPM Compatible](https://img.shields.io/badge/SwiftPM-Compatible-brightgreen)](https://swift.org/package-manager/)
+[![Version](https://img.shields.io/cocoapods/v/CollectionExtension.svg?style=flat)](https://cocoapods.org/pods/CollectionExtension)
+[![License](https://img.shields.io/cocoapods/l/CollectionExtension.svg?style=flat)](https://cocoapods.org/pods/CollectionExtension)
+[![Platform](https://img.shields.io/cocoapods/p/CollectionExtension.svg?style=flat)](https://cocoapods.org/pods/CollectionExtension)
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
