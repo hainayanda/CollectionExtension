@@ -1,14 +1,6 @@
 # CollectionExtension
 
-Collection of Array, Sequence, and any Collection extensions
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/64f3d05c9de64449b767a506097e52a2)](https://app.codacy.com/gh/hainayanda/CollectionExtension/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-![build](https://github.com/hainayanda/CollectionExtension/workflows/build/badge.svg)
-![test](https://github.com/hainayanda/CollectionExtension/workflows/test/badge.svg)
-[![SwiftPM Compatible](https://img.shields.io/badge/SwiftPM-Compatible-brightgreen)](https://swift.org/package-manager/)
-[![Version](https://img.shields.io/cocoapods/v/CollectionExtension.svg?style=flat)](https://cocoapods.org/pods/CollectionExtension)
-[![License](https://img.shields.io/cocoapods/l/CollectionExtension.svg?style=flat)](https://cocoapods.org/pods/CollectionExtension)
-[![Platform](https://img.shields.io/cocoapods/p/CollectionExtension.svg?style=flat)](https://cocoapods.org/pods/CollectionExtension)
+**CollectionExtension** is a versatile collection of extensions and utilities for arrays, dictionaries, sequences, and various collection types in Swift. These extensions offer added functionality for performing various operations on collections.
 
 ## Example
 
@@ -18,41 +10,39 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 - Swift 5.0 or higher (or 5.3 when using Swift Package Manager)
 - iOS 10.0 or higher
-
-### Only Swift Package Manager
-
-- macOS 10.0 or higher
-- tvOS 10.10 or higher
+- macOS 10.0 or higher (for Swift Package Manager)
+- tvOS 10.10 or higher (for Swift Package Manager)
 
 ## Installation
 
 ### Cocoapods
 
-CollectionExtension is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+CollectionExtension is available through [CocoaPods](https://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'CollectionExtension'
 ```
 
-### Swift Package Manager from XCode
+### Swift Package Manager (Xcode)
 
-- Add it using XCode menu **File > Swift Package > Add Package Dependency**
-- Add **<https://github.com/hainayanda/CollectionExtension.git>** as Swift Package URL
-- Set rules at **version**, with **Up to Next Major** option and put **1.0.0** as its version
-- Click next and wait
+To install using Xcode's Swift Package Manager, follow these steps:
 
-### Swift Package Manager from Package.swift
+- Go to **File > Swift Package > Add Package Dependency**
+- Enter the URL: **<https://github.com/hainayanda/CollectionExtension.git>**
+- Choose **Up to Next Major** for the version rule and set the version to **1.0.0**.
+- Click "Next" and wait for the package to be fetched.
 
-Add as your target dependency in **Package.swift**
+### Swift Package Manager (Package.swift)
+
+If you prefer using Package.swift, add CollectionExtension as a dependency in your **Package.swift** file:
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/hainayanda/CollectionExtension.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/hainayanda/CollectionExtension.git", .upToNextMajor(from: "1.0.0"))
 ]
 ```
 
-Use it in your target as `CollectionExtension`
+Then, include it in your target:
 
 ```swift
  .target(
@@ -61,254 +51,157 @@ Use it in your target as `CollectionExtension`
 )
 ```
 
-## Author
+## Usage
 
-hainayanda, hainayanda@outlook.com
+### Safe Subscript (Array and Any Collection)
 
-## License
-
-CollectionExtension is available under the MIT license. See the LICENSE file for more info.
-
----
-
-## Basic Usage
-
-`CollectionExtension` is a collection of Array, Dictionary, Sequence, and Collection extensions that can be used for more complex operations. Here is the list of extension functionality that is included in this library.
-
-### Safe subscript (Array and any Collection except the set part, only available in Array)
-
-A subscript but will return nil if the index is out of bounds:
+The safe subscript allows you to access elements with an index, returning nil if the index is out of bounds:
 
 ```swift
-// if the array count is less than 100, it will return a nil
-let safeResult = myArray[safe: 100]
-
-// if the array count is less than 100, it will do nothing
-myArray[safe: 100] = someValue
-
-// if 10 is in bounds, it will remove the value at index 10
-myArray[safe: 10] = nil
-
-// if 10 is the same as count, it will do append instead
-myArray[safe: 10] = someValue
+let safeResult = myArray[safe: 100] // Returns nil if out of bounds
+myArray[safe: 100] = someValue // Safely sets the value or does nothing if out of bounds
+myArray[safe: 10] = nil // Safely removes the element or appends if index equals count
 ```
 
-### Type erase (any Sequence and LazySequence)
+### Type Erase (Any Sequence and Lazy Sequence)
 
-Type erasing `Sequence` is now easier with functional style:
+Type erasing a sequence is made easy:
 
 ```swift
 let typeErased: AnySequence<Some> = myArray.eraseToAnySequence()
-
 let lazyTypeErased: AnyLazySequence<Some> = myArray.lazy.eraseToAnyLazySequence()
 ```
 
-### Distinction (any Sequence and LazySequence)
+### Distinction (Any Sequence and Lazy Sequence)
 
-Filtering duplicated elements from `Sequence` is now easier without compromising performance while keeping its order:
-
-```swift
-let myArray = [1, 1, 2, 3, 4, 4]
-
-// will contain [1, 2, 3, 4]
-let uniqueArray = myArray.unique
-```
-
-If your element is not equatable, you can use the `distinct` method with KeyPath, projection, or closure comparison instead:
+Easily filter duplicated elements from a sequence while preserving order:
 
 ```swift
-// using projection
-let uniqueArray = myArray.distinct { $0.identifier }
-
-// using closure
-let uniqueArray = myArray.distinct { $0.identifier == $1.identifier }
-
-// using keypath
-let uniqueArray = myArray.distinct(by: \.identifier)
-
-// using object identifier if the element is a class instance
-let uniqueArray = myArray.uniqueInstances
+let uniqueArray = myArray.unique // Removes duplicates and keeps order
 ```
 
-### Create a new array with an added element (Array)
+You can also specify custom comparison logic if your elements are not equatable:
 
-Instead of appending the original array, using added will create a new array that contains the original array added with a new element:
+```swift
+let uniqueArray = myArray.distinct { $0.identifier } // Using projection
+let uniqueArray = myArray.distinct { $0.identifier == $1.identifier } // Using closure
+let uniqueArray = myArray.distinct(by: \.identifier) // Using keypath
+let uniqueArray = myArray.uniqueInstances // Using object identifier
+```
+
+### Create a New Array with an Added Element (Array)
+
+Create a new array by adding an element:
 
 ```swift
 let myArray = [1, 2]
-
-// [1, 2, 3]
-let oneToThree = myArray.added(with: 3)
-
-// [1, 2, 3, 4, 5]
-let oneToFive = myArray.added(withContentsOf: [4, 5])
+let oneToThree = myArray.added(with: 3) // [1, 2, 3]
+let oneToFive = myArray.added(withContentsOf: [4, 5]) // [1, 2, 3, 4, 5]
 ```
 
-### Append and Insert distinct element (Array)
+### Append and Insert Distinct Elements (Array)
 
-Appending and inserting distinct elements will be easier without compromising performance while keeping its order:
+Append or insert distinct elements while maintaining order:
 
 ```swift
 let myArray = [3, 4]
-
-// will still contain [3, 4]
-myArray.appendIfDistinct(4)
-
-// will contain [3, 4, 5]
-myArray.appendAllDistinct(in: [3, 4, 5])
-
-// will contain [3, 4, 5]
-myArray.insertIfDistinct(4, at: 0)
-
-// will contain [1, 2, 3, 4, 5]
-myArray.insertAllDistinct(in: [1, 2, 3, 4], at: 0)
+myArray.appendIfDistinct(4) // Appends 4 if not already present
+myArray.appendAllDistinct(in: [4, 5]) // Appends all distinct elements
+myArray.insertIfDistinct(4, at: 0) // Inserts 4 if not already present
+myArray.insertAllDistinct(in: [1, 2, 3, 4], at: 0) // Inserts all distinct elements
 ```
 
-If you prefer to create a new array instead of appending the original array, use addedIfDistinct/addedAllDistinct or insertedIfDistinct/insertedAllDistinct instead. Example:
+You can also create new arrays instead of modifying the original:
 
 ```swift
 let addedArray = myArray.addedIfDistinct(4)
 ```
 
-If your element is not equatable, you can use KeyPath, projection, or closure comparison instead. It applies to addedIfDistinct/addedAllDistinct or insertedIfDistinct/insertedAllDistinct too:
+You can also specify custom comparison logic if your elements are not equatable:
 
 ```swift
-// using projection
-myArray.appendIfDistinct(some) { $0.identifier }
-
-// using closure
-myArray.appendIfDistinct(some) { $0.identifier == $1.identifier }
-
-// using keypath
-myArray.appendIfDistinct(some, using: \.identifier)
-
-// using object identifier if the element is a class instance
-myArray.appendIfDistinctInstance(some)
+myArray.appendIfDistinct(some) { $0.identifier } // Using projection
+myArray.appendIfDistinct(some) { $0.identifier == $1.identifier } // Using closure
+myArray.appendIfDistinct(some, using: \.identifier) // Using keypath
+myArray.appendIfDistinctInstance(some) // Using object identifier
 ```
 
-### Substract, Intersection, Symmetric Difference (any Sequence and LazySequence)
+### Subtract, Intersect, and Get Symmetric Difference (Any Sequence and Lazy Sequence)
 
-Subtracting, Intersecting, and getting symmetric differences between sequences is very easy:
+Perform set operations with ease while maintaining order:
 
 ```swift
-let left = [1, 2, 3, 4]
-let right = [3, 4, 5, 6]
-
-// [1, 2]
-let substracted = left.substract(by: right)
-
-// [3, 4]
-let intersect = left.intersect(by: right)
-
-// [1, 2, 5, 6]
-let symetricDifference = left.symetricDifference(with: right)
+let subtracted = left.subtract(by: right) // Subtract elements from left
+let intersect = left.intersect(by: right) // Get the intersection of elements
+let symmetricDifference = left.symmetricDifference(with: right) // Get symmetric difference
 ```
 
-As with any other extensions here, if the element is not equatable, simply use KeyPath, projection, or closure comparison instead. Example:
+You can also specify custom comparison logic if your elements are not equatable:
 
 ```swift
-// using projection
-let substracted myArray.substract(by: some) { $0.identifier }
-
-// using closure
-let substracted myArray.substract(by: some) { $0.identifier == $1.identifier }
-
-// using keypath
-let substracted myArray.substract(by: some, by: \.identifier)
-
-// using object identifier if the element is class instance
-let substracted myArray.substractInstances(some)
+let substracted myArray.substract(by: some) { $0.identifier } // Using projection
+let substracted myArray.substract(by: some) { $0.identifier == $1.identifier } // Using closure
+let substracted myArray.substract(by: some, by: \.identifier) // Using keypath
+let substracted myArray.substractInstances(some) // Using object identifier
 ```
 
-### Dropping the element (any Sequence and LazySequence)
+### Drop Elements Until and After a Condition (Any Sequence and Lazy Sequence)
 
-Dropping the element until/after the element is found is very easy:
+Drop elements until or after a specific condition is met:
 
 ```swift
 let array = [1, 2, 3, 4, 5]
-
-// [3, 4, 5]
-let substracted = left.dropAllUntil { $0 == 3 }
-
-// [1, 2, 3]
-let substracted = left.dropAllAfter { $0 == 3 }
+let subtracted = left.dropAllUntil { $0 == 3 } // Drops until condition is met
+let subtracted = left.dropAllAfter { $0 == 3 } // Drops after condition is met
 ```
 
-if the element is equatable you can do this instead:
+if the element is equatable you can do this:
 
 ```swift
 let array = [1, 2, 3, 4, 5]
-
-// [3, 4, 5]
-let substracted = left.dropAllUntil(find: 3)
-
-// [1, 2, 3]
-let substracted = left.dropAllAfter(find: 3)
+let substracted1 = left.dropAllUntil(find: 3)
+let substracted2 = left.dropAllAfter(find: 3)
 ```
 
-### Statistic (any Collection)
+### Statistics (Any Collection)
 
-Some extensions can be used to perform a basic statistic operation, like sum, median, average, etc:
+Calculate basic statistics like sum, median, average, and more:
 
 ```swift
 let array = [1, 2, 3, 4, 5]
-
-// will produce .single(3)
-let median: Median<Int> = array.median 
-
-// will produce 15
-let sum = array.sum 
-
-// will produce 3
-let sum = array.average 
-
-// will produce 1
-let smallest = array.smallest 
-
-// will produce 5
-let biggest = array.biggest 
+let median: Median<Int> = array.median // Calculate median (.single(3))
+let sum = array.sum // Calculate sum (15)
+let average = array.average // Calculate average (3)
+let smallest = array.smallest // Find the smallest element (1)
+let biggest = array.biggest // Find the largest element (5)
 ```
 
 We can count elements like modus and frequency too:
 
 ```swift
 let array = [1, 1, 1, 2, 2, 3, 3, 3, 3]
-
-// will produce 3
-let modus = array.modus 
-
-// will produce 2
-let twoCount = array.elementCount(2) 
-
-// will produce [1: 2, 2: 2, 3: 4]
-let group = array.groupedByFrequency()
+let modus = array.modus // Search modus
+let twoCount = array.elementCount(2) // Calculate count of 2
+let group = array.groupedByFrequency() // Group by frequency ([1: 2, 2: 2, 3: 4])
 ```
 
-Of course, if the element is not equatable we can simply use KeyPath, projection, or closure comparison instead. Example:
+You can also specify custom comparison logic if your elements are not equatable:
 
 ```swift
 // using projection
-myArray.modus { $0.identifier }
-
-// using closure
-myArray.modus { $0.identifier == $1.identifier }
-
-// using keypath
-myArray.modus(by: \.identifier)
-
-// using object identifier if the element is a class instance
-myArray.modusInstances
+myArray.modus { $0.identifier } // Using projection
+myArray.modus { $0.identifier == $1.identifier } // Using closure
+myArray.modus(by: \.identifier) // Using keypath
+myArray.modusInstances // Using object identifier
 ```
 
-### Grouping element (any Sequence)
+### Grouping Elements (Any Sequence)
 
-We can group elements into the dictionary of the array element:
+Group elements based on a condition:
 
 ```swift
 let array = [1, 2, 3, 4, 5]
-
-// will produce ["even": [2, 4], "odd": [1, 3, 5]]
-let group = array.group { $0 % 2 == 0 ? "even": "odd" }
+let group = array.group { $0 % 2 == 0 ? "even": "odd" } // Group by condition (["even": [2, 4], "odd": [1, 3, 5]])
 ```
 
 Or using keyPath:
@@ -317,29 +210,26 @@ Or using keyPath:
 let group = array.group(by: \.someProperty)
 ```
 
-### Transform to a dictionary (any Sequence)
+### Transform to a Dictionary (Any Sequence)
 
-You can transform any sequence to a dictionary similar to grouping the elements, but the value will be an element instead of an array of elements:
+Transform a sequence into a dictionary:
 
 ```swift
-// using closure
-let group = try array.transformToDictionary { $0.identifier }
-
-// using keypath
-let group = try array.transformToDictionary(keyedBy: \.identifier)
+let group1 = try array.transformToDictionary { $0.identifier } // Using closure
+let group2 = try array.transformToDictionary(keyedBy: \.identifier) // Using keypath
 ```
 
-The only drawback here is, if the key is duplicated, it will throw `CollectionExtensionError.duplicatedKey`
+If the key is duplicated, it will throw `CollectionExtensionError.duplicatedKey`
 
 ### Map Keys and Values (any Dictionary)
 
-You can transform any Dictionary to another with different keys but the same value using the `mapKeys` method:
+Transform dictionary keys while keeping the values:
 
 ```swift
-let result = myDictionary.mapKeys { $0.identifier }
+let result = myDictionary.mapKeys { $0.identifier } // Map keys
 ```
 
-Keep in mind that if the key is duplicated, it will throw `CollectionExtensionError.duplicatedKey`
+If the key is duplicated, it will throw `CollectionExtensionError.duplicatedKey`
 
 If you want to overwrite the duplicated key with the next value found, use `overwriteMapKeys` instead:
 
@@ -353,7 +243,7 @@ You can use `compactMapKeys` if you want to ignore the key that cannot produce a
 let result = myDictionary.compactMapKeys { $0.identifier }
 ```
 
-Keep in mind that if the key is duplicated, it will throw `CollectionExtensionError.duplicatedKey`
+If the key is duplicated, it will throw `CollectionExtensionError.duplicatedKey`
 
 If you want to overwrite the duplicated key with the next value found while using `compactMapKeys`, use `overwriteCompactMapKeys` instead:
 
@@ -362,38 +252,36 @@ let result = myDictionary.overwriteCompactMapKeys { $0.identifier }
 ```
 
 If you need a key and value to produce a new key, use:
+
 - `mapKeyValues` instead of `mapKeys`
 - `overwriteMapKeysValues` instead of `overwriteMapKeys`
 - `compactMapKeysValues` instead of `compactMapKeys`
 - `overwriteCompactMapKeysValues` instead of `overwriteCompactMapKeys`
 
-### Async iteration (any Sequence)
+### Asynchronous Iteration (Any Sequence)
 
-Sometimes you want to iterate using forEach or map but the operation is async and you need to keep the sequence order. This can be done with this library:
+Iterate asynchronously while preserving sequence order:
 
 ```swift
-// regular
 array.asyncForEach { element in
     await element.someTask()
 }
 
-// keep iterating even if there's an error in some task
 array.asyncForEachIgnoreError { element in
     try await element.someTaskWithError()
 }
 
-// regular, if needed you can use asyncCompactMap
 array.asyncMap { element in
     await element.produceSomeValue()
 }
 
-// keep iterating even if there's an error in some task, if needed you can use asyncCompactMapSkipError
 array.asyncMapSkipError { element in
     try await element.produceSomeValueWithError()
 }
 ```
 
-If you prefer using Combine Future instead of Async Await, use:
+You can also use Combine Future instead of async/await:
+
 - `futureForEach` instead of `asyncForEach`
 - `futureForEachIgnoreError` instead of `asyncForEachIgnoreError`
 - `futureMap` instead of `asyncMap`
@@ -401,12 +289,20 @@ If you prefer using Combine Future instead of Async Await, use:
 - `futureCompactMap` instead of `asyncCompactMap`
 - `futureCompactMapSkipError` instead of `asyncCompactMapSkipError`
 
-### Extra
+### Doubly Linked List
 
-`DoublyLinkedList` class to use if needed which implements `Sequence` and `Collection`
+The library provides a DoublyLinkedList class for further collection management.
 
 ---
 
 ## Contribute
 
-You know-how. Just clone and do a pull request
+Feel free to contribute by cloning the repository and creating pull requests.
+
+## Author
+
+Nayanda Haberty, <hainayanda@outlook.com>
+
+## License
+
+CombineAsync is available under the MIT license. See the LICENSE file for more info.
