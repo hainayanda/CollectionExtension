@@ -67,8 +67,8 @@ The safe subscript allows you to access elements with an index, returning nil if
 
 ```swift
 let safeResult = myArray[safe: 100] // Returns nil if out of bounds
-myArray[safe: 100] = someValue // Safely sets the value or does nothing if out of bounds
-myArray[safe: 10] = nil // Safely removes the element or appends if index equals count
+myArray[safe: 100] = someValue // Safely sets the value, does nothing if out of bounds or appends if index equals count
+myArray[safe: 10] = nil // Safely removes the element
 ```
 
 ### Type Erase (Any Sequence and Lazy Sequence)
