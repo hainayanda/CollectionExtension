@@ -20,7 +20,14 @@ extension Sequence {
             for element in self {
                 group.addTask { try await doTask(element) }
             }
-            try await group.waitForAll()
+            do {
+                while let _ = try await group.next() {
+                    // no error
+                }
+            } catch {
+                group.cancelAll()
+                throw error
+            }
         }
     }
     
@@ -66,11 +73,16 @@ extension Sequence {
             for (index, element) in self.enumerated() {
                 group.addTask { return (index, try await mapper(element))}
             }
-            while let result = try await group.next() {
-                results.append(result)
+            do {
+                while let result = try await group.next() {
+                    results.append(result)
+                }
+                return results.sorted { $0.0 < $1.0 }
+                    .map { $0.1 }
+            } catch {
+                group.cancelAll()
+                throw error
             }
-            return results.sorted { $0.0 < $1.0 }
-                .map { $0.1 }
         }
     }
     
@@ -124,11 +136,17 @@ extension Sequence {
             for (index, element) in self.enumerated() {
                 group.addTask { return (index, try await mapper(element))}
             }
-            while let result = try await group.next() {
-                results.append(result)
+            do {
+                while let result = try await group.next() {
+                    results.append(result)
+                }
+                return results.sorted { $0.0 < $1.0 }
+                    .compactMap { $0.1 }
             }
-            return results.sorted { $0.0 < $1.0 }
-                .compactMap { $0.1 }
+            catch {
+                group.cancelAll()
+                throw error
+            }
         }
     }
     
@@ -320,12 +338,19 @@ extension Sequence {
                 try await Task.sleep(nanoseconds: UInt64(timeout * 1_000_000_000))
                 throw CollectionExtensionError.timeOut
             }
-            let result = try await group.next()
-            group.cancelAll()
-            guard let result else {
-                throw CollectionExtensionError.failedToProduceResult
+            do {
+                let result = try await group.next()
+                group.cancelAll()
+                guard let result else {
+                    // this is unlikely to happen
+                    throw CollectionExtensionError.failedToProduceResult
+                }
+                return result
+            } catch {
+                // cancel other task, it might producing a timeout
+                group.cancelAll()
+                throw error
             }
-            return result
         }
     }
 }
