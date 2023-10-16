@@ -9,4 +9,6 @@ import Foundation
 
 public enum CollectionExtensionError: Error {
     case duplicatedKey
+    case timeOut
+    case failedToProduceResult
 }
