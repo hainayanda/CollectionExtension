@@ -15,7 +15,7 @@ extension Sequence {
     /// Calls the given closure on each element in the sequence in the same order asynchronously and wait for all to finished
     /// It will run the closure asynchronously and throwing error if one of the closure is failing.
     /// - Parameter doTask: Asynchronous task to be run on each iteration
-    public func asyncForEach(_ doTask: @escaping (Element) async throws -> Void) async rethrows {
+    public func asyncForEach(_ doTask: @Sendable @escaping (Element) async throws -> Void) async rethrows {
         try await withThrowingTaskGroup(of: Void.self, returning: Void.self) { group in
             for element in self {
                 group.addTask { try await doTask(element) }
@@ -36,7 +36,7 @@ extension Sequence {
     /// - Parameters:
     ///   - timeout: Timeout of the whole for each tasks
     ///   - doTask: Asynchronous task to be run on each iteration
-    public func asyncForEach(timeout: TimeInterval, _ doTask: @escaping (Element) async throws -> Void) async throws {
+    public func asyncForEach(timeout: TimeInterval, _ doTask: @Sendable @escaping (Element) async throws -> Void) async throws {
         try await withTimeout(timeout: timeout) {
             try await self.asyncForEach(doTask)
         }
@@ -44,7 +44,7 @@ extension Sequence {
     
     /// Calls the given closure on each element in the sequence in the same order asynchronously and wait for all to finished while ignoring the error throws
     /// - Parameter doTask: Asynchronous task to be run on each iteration
-    public func asyncForEachIgnoreError(_ doTask: @escaping (Element) async throws -> Void) async {
+    public func asyncForEachIgnoreError(_ doTask: @Sendable @escaping (Element) async throws -> Void) async {
         await asyncForEach { element in
             try? await doTask(element)
         }
@@ -55,7 +55,7 @@ extension Sequence {
     /// - Parameters:
     ///   - timeout: Timeout of the whole for each tasks
     ///   - doTask: Asynchronous task to be run on each iteration
-    public func asyncForEachIgnoreError(timeout: TimeInterval, _ doTask: @escaping (Element) async throws -> Void) async {
+    public func asyncForEachIgnoreError(timeout: TimeInterval, _ doTask: @Sendable @escaping (Element) async throws -> Void) async {
         try? await withTimeout(timeout: timeout) {
             await self.asyncForEachIgnoreError(doTask)
         }
@@ -67,7 +67,7 @@ extension Sequence {
     /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///             and returns a transformed value of the same or of a different type asynchronously.
     /// - Returns: An array containing the transformed elements of this sequence
-    public func asyncMap<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped) async rethrows -> [Mapped] {
+    public func asyncMap<Mapped>(_ mapper: @Sendable @escaping (Element) async throws -> Mapped) async rethrows -> [Mapped] {
         try await withThrowingTaskGroup(of: (Int, Mapped).self, returning: [Mapped].self) { group in
             var results: [(Int, Mapped)] = []
             for (index, element) in self.enumerated() {
@@ -94,7 +94,7 @@ extension Sequence {
     ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///             and returns a transformed value of the same or of a different type asynchronously.
     /// - Returns: An array containing the transformed elements of this sequence
-    public func asyncMap<Mapped>(timeout: TimeInterval, _ mapper: @escaping (Element) async throws -> Mapped) async throws -> [Mapped] {
+    public func asyncMap<Mapped>(timeout: TimeInterval, _ mapper: @Sendable @escaping (Element) async throws -> Mapped) async throws -> [Mapped] {
         try await withTimeout(timeout: timeout) {
             try await self.asyncMap(mapper)
         }
@@ -106,7 +106,7 @@ extension Sequence {
     /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///             and returns a transformed value of the same or of a different type asynchronously.
     /// - Returns: An array containing the transformed elements of this sequence
-    public func asyncMapSkipError<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped) async -> [Mapped] {
+    public func asyncMapSkipError<Mapped>(_ mapper: @Sendable @escaping (Element) async throws -> Mapped) async -> [Mapped] {
         await asyncCompactMap { try? await mapper($0) }
     }
     
@@ -119,7 +119,7 @@ extension Sequence {
     ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///             and returns a transformed value of the same or of a different type asynchronously.
     /// - Returns: An array containing the transformed elements of this sequence
-    public func asyncMapSkipError<Mapped>(timeout: TimeInterval, _ mapper: @escaping (Element) async throws -> Mapped) async -> [Mapped] {
+    public func asyncMapSkipError<Mapped>(timeout: TimeInterval, _ mapper: @Sendable @escaping (Element) async throws -> Mapped) async -> [Mapped] {
         await asyncCompactMapSkipError(timeout: timeout, { try? await mapper($0) })
     }
     
@@ -130,7 +130,7 @@ extension Sequence {
     /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///             and returns an optional transformed value of the same or of a different type asynchronously.
     /// - Returns: An array containing the transformed elements of this sequence
-    public func asyncCompactMap<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped?) async rethrows -> [Mapped] {
+    public func asyncCompactMap<Mapped>(_ mapper: @Sendable @escaping (Element) async throws -> Mapped?) async rethrows -> [Mapped] {
         try await withThrowingTaskGroup(of: (Int, Mapped?).self, returning: [Mapped].self) { group in
             var results: [(Int, Mapped?)] = []
             for (index, element) in self.enumerated() {
@@ -159,7 +159,7 @@ extension Sequence {
     ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///             and returns an optional transformed value of the same or of a different type asynchronously.
     /// - Returns: An array containing the transformed elements of this sequence
-    public func asyncCompactMap<Mapped>(timeout: TimeInterval, _ mapper: @escaping (Element) async throws -> Mapped?) async throws -> [Mapped] {
+    public func asyncCompactMap<Mapped>(timeout: TimeInterval, _ mapper: @Sendable @escaping (Element) async throws -> Mapped?) async throws -> [Mapped] {
         try await withTimeout(timeout: timeout) {
             try await self.asyncCompactMap(mapper)
         }
@@ -171,7 +171,7 @@ extension Sequence {
     /// It will still retain the original order of the element regardless of the order of mapping time completion
     /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     /// - Returns: An array containing the transformed elements of this sequence
-    public func asyncCompactMapSkipError<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped?) async -> [Mapped] {
+    public func asyncCompactMapSkipError<Mapped>(_ mapper: @Sendable @escaping (Element) async throws -> Mapped?) async -> [Mapped] {
         await asyncCompactMap { try? await mapper($0) }
     }
     
@@ -184,7 +184,7 @@ extension Sequence {
     ///   - timeout: Timeout of the whole map tasks
     ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     /// - Returns: An array containing the transformed elements of this sequence
-    public func asyncCompactMapSkipError<Mapped>(timeout: TimeInterval, _ mapper: @escaping (Element) async throws -> Mapped?) async -> [Mapped] {
+    public func asyncCompactMapSkipError<Mapped>(timeout: TimeInterval, _ mapper: @Sendable @escaping (Element) async throws -> Mapped?) async -> [Mapped] {
         await withThrowingTaskGroup(of: (Int, Mapped?).self, returning: [Mapped].self) { group in
             var results: [(Int, Mapped?)] = []
             for (index, element) in self.enumerated() {
@@ -331,7 +331,7 @@ extension Sequence {
     
     // MARK: Private methods
     
-    private func withTimeout<Result>(timeout: TimeInterval, _ task: @escaping () async throws -> Result) async throws -> Result {
+    private func withTimeout<Result>(timeout: TimeInterval, _ task: @Sendable @escaping () async throws -> Result) async throws -> Result {
         try await withThrowingTaskGroup(of: Result.self, returning: Result.self) { group in
             group.addTask { try await task() }
             group.addTask {
