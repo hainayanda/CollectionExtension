@@ -21,7 +21,7 @@ extension Sequence {
                 group.addTask { try await doTask(element) }
             }
             do {
-                while let _ = try await group.next() {
+                while try await group.next() != nil {
                     // no error
                 }
             } catch {
@@ -142,8 +142,7 @@ extension Sequence {
                 }
                 return results.sorted { $0.0 < $1.0 }
                     .compactMap { $0.1 }
-            }
-            catch {
+            } catch {
                 group.cancelAll()
                 throw error
             }
