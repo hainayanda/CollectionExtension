@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CollectionExtension'
-  s.version          = '1.0.0'
+  s.version          = '1.1.0'
   s.summary          = 'Collection of Array, Sequence, and any collection extensions'
 
 # This description is used to generate tags and improve search results.
