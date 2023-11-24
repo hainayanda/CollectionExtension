@@ -211,8 +211,8 @@ extension Sequence {
     /// It will run the closure asynchronously and throwing error if one of the closure is failing.
     /// - Parameter doTask: Asynchronous task to be run on each iteration
     /// - Returns: A publisher that run after all the task is finished
-    public func futureForEach(_ doTask: @escaping (Element) async throws -> Void) -> Future<Void, Error> {
-        futureTask { try await self.asyncForEach(doTask) }
+    public func futureForEach(priority: TaskPriority? = nil, _ doTask: @Sendable @escaping (Element) async throws -> Void) -> Future<Void, Error> {
+        futureTask(priority: priority) { try await self.asyncForEach(doTask) }
     }
     
     /// Calls the given closure on each element in the sequence in the same order asynchronously and wait for all to finished
@@ -221,15 +221,15 @@ extension Sequence {
     ///   - timeout: Timeout of the whole tasks
     ///   - doTask: Asynchronous task to be run on each iteration
     /// - Returns: A publisher that run after all the task is finished
-    public func futureForEach(timeout: TimeInterval, _ doTask: @escaping (Element) async throws -> Void) -> Future<Void, Error> {
-        futureTask { try await self.asyncForEach(timeout: timeout, doTask) }
+    public func futureForEach(priority: TaskPriority? = nil, timeout: TimeInterval, _ doTask: @Sendable @escaping (Element) async throws -> Void) -> Future<Void, Error> {
+        futureTask(priority: priority) { try await self.asyncForEach(timeout: timeout, doTask) }
     }
     
     /// Calls the given closure on each element in the sequence in the same order asynchronously and wait for all to finished while ignoring the error throws
     /// - Parameter doTask: Asynchronous task to be run on each iteration
     /// - Returns: A publisher that run after all the task is finished
-    public func futureForEachIgnoreError(_ doTask: @escaping (Element) async throws -> Void) -> Future<Void, Never> {
-        futureTask { await self.asyncForEachIgnoreError(doTask) }
+    public func futureForEachIgnoreError(priority: TaskPriority? = nil, _ doTask: @Sendable @escaping (Element) async throws -> Void) -> Future<Void, Never> {
+        futureTask(priority: priority) { await self.asyncForEachIgnoreError(doTask) }
     }
     
     /// Calls the given closure on each element in the sequence in the same order asynchronously and wait for all to finished while ignoring the error throws
@@ -237,8 +237,8 @@ extension Sequence {
     ///   - timeout: Timeout of the whole tasks
     ///   - doTask: Asynchronous task to be run on each iteration
     /// - Returns: A publisher that run after all the task is finished
-    public func futureForEachIgnoreError(timeout: TimeInterval, _ doTask: @escaping (Element) async throws -> Void) -> Future<Void, Never> {
-        futureTask { await self.asyncForEachIgnoreError(timeout: timeout, doTask) }
+    public func futureForEachIgnoreError(priority: TaskPriority? = nil, timeout: TimeInterval, _ doTask: @Sendable @escaping (Element) async throws -> Void) -> Future<Void, Never> {
+        futureTask(priority: priority) { await self.asyncForEachIgnoreError(timeout: timeout, doTask) }
     }
     
     /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements.
@@ -247,8 +247,8 @@ extension Sequence {
     /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///   and returns a transformed value of the same or of a different type asynchronously.
     /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
-    public func futureMap<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped) -> Future<[Mapped], Error> {
-        futureTask { try await self.asyncMap(mapper) }
+    public func futureMap<Mapped>(priority: TaskPriority? = nil, _ mapper: @Sendable @escaping (Element) async throws -> Mapped) -> Future<[Mapped], Error> {
+        futureTask(priority: priority) { try await self.asyncMap(mapper) }
     }
     
     /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements.
@@ -259,8 +259,8 @@ extension Sequence {
     ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///   and returns a transformed value of the same or of a different type asynchronously.
     /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
-    public func futureMap<Mapped>(timeout: TimeInterval, _ mapper: @escaping (Element) async throws -> Mapped) -> Future<[Mapped], Error> {
-        futureTask { try await self.asyncMap(timeout: timeout, mapper) }
+    public func futureMap<Mapped>(priority: TaskPriority? = nil, timeout: TimeInterval, _ mapper: @Sendable @escaping (Element) async throws -> Mapped) -> Future<[Mapped], Error> {
+        futureTask(priority: priority) { try await self.asyncMap(timeout: timeout, mapper) }
     }
     
     /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements.
@@ -268,8 +268,8 @@ extension Sequence {
     /// It will still retain the original order of the element regardless of the order of mapping time completion
     /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
-    public func futureMapSkipError<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped) -> Future<[Mapped], Error> {
-        futureTask { await self.asyncMapSkipError(mapper) }
+    public func futureMapSkipError<Mapped>(priority: TaskPriority? = nil, _ mapper: @Sendable @escaping (Element) async throws -> Mapped) -> Future<[Mapped], Error> {
+        futureTask(priority: priority) { await self.asyncMapSkipError(mapper) }
     }
     
     /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements.
@@ -279,8 +279,8 @@ extension Sequence {
     ///   - timeout: Timeout of the whole tasks
     ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
-    public func futureMapSkipError<Mapped>(timeout: TimeInterval, _ mapper: @escaping (Element) async throws -> Mapped) -> Future<[Mapped], Error> {
-        futureTask { await self.asyncMapSkipError(timeout: timeout, mapper) }
+    public func futureMapSkipError<Mapped>(priority: TaskPriority? = nil, timeout: TimeInterval, _ mapper: @Sendable @escaping (Element) async throws -> Mapped) -> Future<[Mapped], Error> {
+        futureTask(priority: priority) { await self.asyncMapSkipError(timeout: timeout, mapper) }
     }
     
     /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements
@@ -290,8 +290,8 @@ extension Sequence {
     /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///   and returns an optional transformed value of the same or of a different type asynchronously.
     /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
-    public func futureCompactMap<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped?) -> Future<[Mapped], Error> {
-        futureTask { try await self.asyncCompactMap(mapper) }
+    public func futureCompactMap<Mapped>(priority: TaskPriority? = nil, _ mapper: @Sendable @escaping (Element) async throws -> Mapped?) -> Future<[Mapped], Error> {
+        futureTask(priority: priority) { try await self.asyncCompactMap(mapper) }
     }
     
     /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements
@@ -303,8 +303,8 @@ extension Sequence {
     ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     ///   and returns an optional transformed value of the same or of a different type asynchronously.
     /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
-    public func futureCompactMap<Mapped>(timeout: TimeInterval, _ mapper: @escaping (Element) async throws -> Mapped?) -> Future<[Mapped], Error> {
-        futureTask { try await self.asyncCompactMap(timeout: timeout, mapper) }
+    public func futureCompactMap<Mapped>(priority: TaskPriority? = nil, timeout: TimeInterval, _ mapper: @Sendable @escaping (Element) async throws -> Mapped?) -> Future<[Mapped], Error> {
+        futureTask(priority: priority) { try await self.asyncCompactMap(timeout: timeout, mapper) }
     }
     
     /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements
@@ -313,8 +313,8 @@ extension Sequence {
     /// It will still retain the original order of the element regardless of the order of mapping time completion
     /// - Parameter mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
-    public func futureCompactMapSkipError<Mapped>(_ mapper: @escaping (Element) async throws -> Mapped?) -> Future<[Mapped], Error> {
-        futureTask { await self.asyncCompactMapSkipError(mapper) }
+    public func futureCompactMapSkipError<Mapped>(priority: TaskPriority? = nil, _ mapper: @Sendable @escaping (Element) async throws -> Mapped?) -> Future<[Mapped], Error> {
+        futureTask(priority: priority) { await self.asyncCompactMapSkipError(mapper) }
     }
     
     /// Returns Future with output array containing the results of mapping the given async closure over the sequence's elements
@@ -325,8 +325,8 @@ extension Sequence {
     ///   - timeout: Timeout of the whole tasks
     ///   - mapper: A mapping async closure. `mapper` accepts an element of this sequence as its parameter
     /// - Returns: A publisher that will produce an array containing the transformed elements of this sequence
-    public func futureCompactMapSkipError<Mapped>(timeout: TimeInterval, _ mapper: @escaping (Element) async throws -> Mapped?) -> Future<[Mapped], Error> {
-        futureTask { await self.asyncCompactMapSkipError(timeout: timeout, mapper) }
+    public func futureCompactMapSkipError<Mapped>(priority: TaskPriority? = nil, timeout: TimeInterval, _ mapper: @Sendable @escaping (Element) async throws -> Mapped?) -> Future<[Mapped], Error> {
+        futureTask(priority: priority) { await self.asyncCompactMapSkipError(timeout: timeout, mapper) }
     }
     
     // MARK: Private methods
@@ -357,9 +357,9 @@ extension Sequence {
 
 // MARK: Private function
 
-private func futureTask<Output>(_ task: @escaping () async throws -> Output) -> Future<Output, Error> {
+private func futureTask<Output>(priority: TaskPriority? = nil, _ task: @Sendable @escaping () async throws -> Output) -> Future<Output, Error> {
     Future { promise in
-        Task {
+        Task(priority: priority) {
             do {
                 try await promise(.success(task()))
             } catch {
@@ -369,9 +369,9 @@ private func futureTask<Output>(_ task: @escaping () async throws -> Output) -> 
     }
 }
 
-private func futureTask<Output>(_ task: @escaping () async -> Output) -> Future<Output, Never> {
+private func futureTask<Output>(priority: TaskPriority? = nil, _ task: @escaping () async -> Output) -> Future<Output, Never> {
     Future { promise in
-        Task {
+        Task(priority: priority) {
             await promise(.success(task()))
         }
     }
