@@ -92,7 +92,7 @@ class SequenceAsyncAwaitSpec: AsyncSpec {
         it("should map all aynchronously until timeout") {
             let counter = AtomicCounter(0)
             do {
-                let result = try await [1, 2, 3, 4, 5].asyncMap(timeout: 0.0001) { number in
+                _ = try await [1, 2, 3, 4, 5].asyncMap(timeout: 0.0001) { number in
                     try await Task.sleep(nanoseconds: UInt64(1_000_000 * number))
                     await counter.add(1)
                     return number.description
