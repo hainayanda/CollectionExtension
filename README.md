@@ -37,7 +37,7 @@ To install using Xcode's Swift Package Manager, follow these steps:
 
 - Go to **File > Swift Package > Add Package Dependency**
 - Enter the URL: **<https://github.com/hainayanda/CollectionExtension.git>**
-- Choose **Up to Next Major** for the version rule and set the version to **1.0.0**.
+- Choose **Up to Next Major** for the version rule and set the version to **1.1.0**.
 - Click "Next" and wait for the package to be fetched.
 
 ### Swift Package Manager (Package.swift)
@@ -46,7 +46,7 @@ If you prefer using Package.swift, add CollectionExtension as a dependency in yo
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/hainayanda/CollectionExtension.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/hainayanda/CollectionExtension.git", .upToNextMajor(from: "1.1.0"))
 ]
 ```
 
